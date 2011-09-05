@@ -1,0 +1,10 @@
+2011-09-04 22:49:08 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:49:08 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:03 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:03 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:05 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:05 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:38 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:51:38 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:52:06 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
+2011-09-04 22:52:06 - PHP Notice:  Undefined variable: descuento in C:\wamp\www\opencart\catalog\controller\product\category.php on line 212
