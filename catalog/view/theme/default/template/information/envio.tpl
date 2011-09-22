@@ -14,6 +14,9 @@ $().ready(function(){
   </div>
   <div class="pages-content" style="margin-bottom: 23px;" >
     <div>
+    <?php if( isset($desc) ) { echo $desc; } ?>
+
+<!--
 <h1 style="color: #cc6633; font-size: 14px; font-weight: bolder;">PARA EL INTERIOR DE LA REP&Uacute;BLICA</h1>
 <p>
 1.El costo de envi&oacute;o ampara, empaquetado de la mercanc&iacute;a, y traslado v&iacute;a terrestra a domicilio solicitado.
@@ -53,6 +56,8 @@ S&aacute;bado de 10:00am a 6:00pm.
 <p>
 <p>
 <span style="color:#333333;"><strong>NOTA:</strong> Al comprar cualquier art&iacute;culo el usuario acepta los t&eacute;rminos y condiciones de estas pol&iacute;ticas. </span>
+-->
+
     </div>
 
   </div>

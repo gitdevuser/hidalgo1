@@ -19,10 +19,7 @@
       <span>No disponible</span>
     </div>
 
-
-    <?php if ($thumb || $images) { ?>
-    
-      <?php if ($thumb) { ?>
+    <?php if ( count( $Arrimagen ) > 0 ) { ?>
 
       <?php if ( count( $Arrimagen ) > 0 ) { ?>
       <?php foreach( $Arrimagen as $img_val ) { ?>
@@ -59,12 +56,12 @@
            foreach ( $arrImgEst as $rs_imgEst ) {
  
            //Popup
-           $popup_adt = $this->model_tool_image->resize($rs_imgEst, $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+           $popup_adt = $this->model_tool_image->resize($rs_imgEst['img_nom'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
            //Thumb
-           $thumb_adt = $this->model_tool_image->resize($rs_imgEst, $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
+           $thumb_adt = $this->model_tool_image->resize($rs_imgEst['img_nom'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
 
       ?>
-      <div class="image thumb-image<?php  echo $x1++; ?>" >
+      <div class="image estilo-img thumb-image<?php  echo $x1++; ?>" >
         <div class="zoom" >
           <a href="<?php echo $popup_adt; ?>" title="<?php echo $heading_title; ?>" class="fancybox" rel="fancybox">
            Zoom
@@ -72,7 +69,7 @@
         </div>
 
         <div class="clearfix">
-          <a href="image/<?php echo $rs_imgEst; ?>" class="jqzoom" title="" >
+          <a href="image/<?php echo $rs_imgEst['img_nom']; ?>" class="jqzoom" title="" >
             <img src="<?php echo $popup_adt; ?>" title="" class="imagen_princ" >
           </a>
         </div>
@@ -83,7 +80,6 @@
       }
 
       ?>
-      <?php } ?>
 
       <div class="image-additional">
       <?php
@@ -93,11 +89,11 @@
       $popup_adt = '';
       $thumb_adt = '';
       foreach ( $arrImgEst as $rs_imgEst ) {
-         if ( $rs_imgEst !=""  )  {
+         if ( $rs_imgEst['img_nom'] !=""  )  {
        //Popup
-	$popup_adt = $this->model_tool_image->resize($rs_imgEst, $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+	$popup_adt = $this->model_tool_image->resize($rs_imgEst['img_nom'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
        //Thumb
-	$thumb_adt = $this->model_tool_image->resize($rs_imgEst, $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
+	$thumb_adt = $this->model_tool_image->resize($rs_imgEst['img_nom'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
         echo '<a href="'.$popup_adt.'" class="thumb-image" ><img src="'.$thumb_adt.'" /></a>';
          }
       ?>
@@ -107,13 +103,13 @@
       </div>
     
     <?php } else { ?>
-	
-      <div class="image">
+        
+      <div class="image" style="display:block;" >
         <div class="zoom" ></div>
         <img src="catalog/view/theme/default/image/sin.jpg" title="">
       </div>
 	
-	<?php } ?>
+    <?php } ?>
 	
 	</div>
 	
@@ -126,7 +122,7 @@
              <tr>
                 <td colspan="2" class="atr-detailProd-title" >
                     Detalle de producto
-                    <a href="#" class="close-atribute" ></a>
+                    <img src="catalog/view/theme/default/image/close-atribute.png" class="close-atribute" >
                 </td>
              </tr>
             </thead>
@@ -206,25 +202,17 @@
 
 
       <div class="description" >
-        <span class="stock" ><?php echo $text_stock; ?><?php echo $stock; ?></span>
+        <span class="stock" >Hay en existencia</span>
         <span class="code"><?php echo $text_model; ?><?php echo $model; ?></span>
       </div>
       <div id="product-title" ><?php echo $heading_title; ?></div>
       <div id="desc-product" >
-        <div class="desc-title" ><?php echo $tab_description; ?></div>
-        <?php 
-        if ( count( $Arrdesc ) > 0 ) {
-           foreach ( $Arrdesc as $desc_text ) {
-             echo '<div class="desc-text '.$desc_text['selected'].'" 
-                        name="'.$desc_text['product_id'].'" >'.$desc_text['descripcion'].'</div>';
-           }
-        }
-        ?>
+        <div class="desc-title" >Descripci&oacute;n</div>
+        <?php if ( (isset($desc1)) && ($desc1 !="") ) { echo $desc1; } ?>
       </div>
       <a href="#" class="detail-product-link" ><?php echo $produc_detail_link; ?></a>
-
-      <?php if ($attribute_groups) { ?>
-      <?php } ?><!-- Detalle del producto -->
+      
+      <!-- Detalle del producto -->
 
       <div class="product-color">
          <?php echo $text_color; ?>
@@ -245,6 +233,7 @@
           <?php
           if ( count( $ArrnomColor ) > 0 ) {
              $i = 0;
+
              foreach ( $ArrnomColor as $colorItem ) {
                $slc = "";
                if( $i++ == 0 ) {
@@ -254,7 +243,6 @@
                    class="choose-color '.$slc.'">
                     <span id="hoverColor-container" >
                       <span class="hover-color" style="background: #fff url('.$colorItem['c_textura'].');"  ></span>
-                       <span class="hover-color-name" >'.$colorItem['c_nombre'].'</span>
                       </span>
                     </span>
                     </li>';
@@ -299,7 +287,7 @@
 
         <div class="buy-container">
           <span class="buy" ><?php echo $text_qty; ?></span>
-          <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
+          <input type="text" name="quantity" size="2" value="1" />
           <p>
           <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
           <p>
@@ -309,49 +297,33 @@
         <div id="price-cart-content">
             <div id="price-cart">
                 <?php if ($price) { ?>
-                    <?php if (!$special) { ?>
                     <?php echo $price; ?>
-                    <?php } else { ?>
-                    <?php echo $special; ?>
-                    <?php } ?>
                 <?php } ?>
             </div>
             <a id="button-cart" class="button"></a>
             <a id="no-stock" class="button"> Producto no disponible </a>
         </div>
 
-        <?php if ($minimum > 1) { ?>
-        <div class="minimum"><?php echo $text_minimum; ?></div>
-        <?php } ?>
-        
       </div><!-- Cart -->
 
     </div>
   </div>
 
-  <?php if ($products) { ?>
+  <?php
+  if (isset( $product_related ) && ( count($product_related) > 0 ) ) { ?>
+
   <div id="tab-related" class="tab-content">
     <div id="related-product-title" ><?php echo $related_title;  ?></div>
     <div class="box-product">
-      <?php foreach ($products as $product) { ?>
+      <?php foreach ($product_related as $product) { ?>
       <div>
         <?php if ($product['thumb']) { ?>
-        <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
+            <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
+        <?php } else { ?>
+            <div class="image"><a href="<?php echo $product['href']; ?>"><img src="catalog/view/theme/default/image/sin.jpg" alt="<?php echo $product['name']; ?>" /></a></div>
         <?php } ?>
         <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-        <?php if ($product['price']) { ?>
-        <div class="price">
-          <?php if (!$product['special']) { ?>
-          <?php echo $product['price']; ?>
-          <?php } else { ?>
-          <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>
-          <?php } ?>
         </div>
-        <?php } ?>
-        <?php if ($product['rating']) { ?>
-        <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
-        <?php } ?>
-        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><span><?php echo $button_cart; ?></span></a></div>
       <?php } ?>
     </div>
   </div>
@@ -429,14 +401,18 @@ $('#button-cart').bind('click', function() {
 			}
 
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-
+				$('#notification').html('<div class="attention" style="display: block;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 				$('.attention').fadeIn('slow');
-
 				$('#cart_total').html(json['total']);
-
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
+                                setTimeout(function() {
+                                    $('.attention').fadeOut( 500 );
+                                }, 2500);
+                                clearTimeout();
+
 			}
+                        
+
 		}
 	});
 

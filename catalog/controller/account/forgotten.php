@@ -2,6 +2,45 @@
 class ControllerAccountForgotten extends Controller {
 	private $error = array();
 
+
+        public function htmlMail( $msj ) {
+
+            $html = '
+              <style>
+                  #tabla-mail {
+                    border:1px solid #CCCCCC;
+                    font-family: Arial;
+                    line-height: normal;
+                    width: 500px;
+                    color: #666666;
+                  }
+                  #tabla-mail .ttl,
+                  #tabla-mail th
+                  {
+                    text-align: left;
+                    font-weight: bold;
+                    padding: 5px;
+                    color: #000;
+                  }
+                  #tabla-mail th {
+                    background-color: #CC6633;
+                    color: #fff;
+                    text-transform: uppercase;
+                  }
+              </style>
+              <table id="tabla-mail" class="ExternalClass" >
+               <tr>
+                <th colspan="2">Recuperaci&oacute;n de contrase&ntilde;a</th>
+               </tr>
+               <tr>
+                <td>'.$msj.'</td>
+               </tr>
+              </table>';
+
+             return $html;
+
+        }
+
 	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->redirect($this->url->link('account/account', '', 'SSL'));
@@ -24,7 +63,7 @@ class ControllerAccountForgotten extends Controller {
 			
 			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
 			$message .= $this->language->get('text_password') . "\n\n";
-			$message .= $password;
+			$message .= '<i><b>'.$password.'</b></i>';
 
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');
@@ -38,7 +77,8 @@ class ControllerAccountForgotten extends Controller {
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($this->config->get('config_name'));
 			$mail->setSubject($subject);
-			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+			//$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+                        $mail->setHtml($this->htmlMail($message));
 			$mail->send();
 			
 			$this->session->data['success'] = $this->language->get('text_success');

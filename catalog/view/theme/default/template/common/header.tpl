@@ -48,10 +48,6 @@ DD_belatedPNG.fix('#logo img');
 
 <div id="header-container">
 <div id="header">
-    
-  <?php /*if ($logo) { ?>
-    <div id="logo"><a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>
-  <?php }*/ ?>
 
   <?php if (count($languages) > 1) { ?>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -72,7 +68,7 @@ DD_belatedPNG.fix('#logo img');
       <?php if ($currency['symbol_left']) { ?>
       <a title="<?php echo $currency['title']; ?>"><b><?php echo $currency['symbol_left']; ?></b></a>
       <?php } else { ?>
-      <a title="<?php echo $currency['title']; ?>"><b><?php echo $currency['symbol_right']; ?></b></a>
+      <!--<a title="<?php echo $currency['title']; ?>"><b><?php echo $currency['symbol_right']; ?></b></a>-->
       <?php } ?>
       <?php } else { ?>
       <?php if ($currency['symbol_left']) { ?>
@@ -92,8 +88,8 @@ DD_belatedPNG.fix('#logo img');
     <div id="redes">
       <ul>
         <li class="title">Siguenos:</li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
+        <li><a href="<?php echo $facebook; ?>" target="_blank">Facebook</a></li>
+        <li><a href="<?php echo $twitter; ?>" target="_blank">Twitter</a></li>
         <li class="title">Suscribete:</li>
         <li>Email</li>
       </ul>
@@ -110,7 +106,9 @@ DD_belatedPNG.fix('#logo img');
 
   <div id="welcome">
     <?php if (!$logged) { ?>
+    <span id="welcome-text">
     <?php echo $text_welcome; ?>
+    </span>
     <?php } else { ?>
     <?php echo $text_logged; ?>
     <?php } ?>

@@ -1,4 +1,5 @@
 <?php if ($addresses) { ?>
+
 <input type="radio" name="<?php echo $type; ?>_address" value="existing" id="<?php echo $type; ?>-address-existing" checked="checked" />
 <label for="<?php echo $type; ?>-address-existing"><?php echo $text_address_existing; ?></label>
 <div id="<?php echo $type; ?>-existing">
@@ -13,7 +14,8 @@
   </select>
 </div>
 <?php } ?>
-<p>
+<br>
+<p id="nueva-direccion" >
   <input type="radio" name="<?php echo $type; ?>_address" value="new" id="<?php echo $type; ?>-address-new" />
   <label for="<?php echo $type; ?>-address-new"><?php echo $text_address_new; ?></label>
 </p>
@@ -27,7 +29,7 @@
       <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
       <td><input type="text" name="lastname" value="" class="large-field" /></td>
     </tr>
-    <tr>
+    <tr style="display:none;">
       <td><?php echo $entry_company; ?></td>
       <td><input type="text" name="company" value="" class="large-field" /></td>
     </tr>
@@ -35,7 +37,7 @@
       <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
       <td><input type="text" name="address_1" value="" class="large-field" /></td>
     </tr>
-    <tr>
+    <tr style="display:none;">
       <td><?php echo $entry_address_2; ?></td>
       <td><input type="text" name="address_2" value="" class="large-field" /></td>
     </tr>
@@ -47,12 +49,12 @@
       <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
       <td><input type="text" name="postcode" value="" class="large-field" /></td>
     </tr>
-    <tr>
+    <tr style="display:none;">
       <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-      <td><select name="country_id" class="large-field" onchange="$('#<?php echo $type; ?>-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=' + this.value);">
+      <td align="left"><select name="country_id" class="large-field" onchange="$('#<?php echo $type; ?>-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=' + this.value);">
           <option value=""><?php echo $text_select; ?></option>
           <?php foreach ($countries as $country) { ?>
-          <?php if ($country['country_id'] == $country_id) { ?>
+          <?php if ($country['country_id'] == 138 ) { ?>
           <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
           <?php } else { ?>
           <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
@@ -62,7 +64,7 @@
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-      <td><select name="zone_id" class="large-field">
+      <td align="left" style="text-align:left;"><select name="zone_id" class="large-field">
         </select></td>
     </tr>
   </table>

@@ -403,14 +403,15 @@ label {
 #header #welcome  a {
         color: #666666;
         font-size: 11px;
-        margin-left: 10px;
-        margin-right: 10px;
+        /*margin-left: 10px;
+        margin-right: 10px;*/
 }
 #header #welcome .logueado {
         text-align: left;
         font-style: oblique;
         color: #fff;
         float: right;
+        padding-left: 30px;
 }
 #header .links {
         height: 54px;
@@ -449,9 +450,14 @@ label {
     float: left;
     font-size: 11px;
 }
+#welcome-text {
+    margin-left: 90px; 
+    margin-top: 5px;
+    display: block;
+}
 #header #welcome {
-    float: right;
-    width: 200px;
+    /*float: right;
+    width: 200px;*/
     padding: 0;
 }
 #header #btn-red {
@@ -579,8 +585,26 @@ label {
 	border: 1px solid #F8ACAC;
 }
 .attention {
-	background: #FFF5CC url('../image/attention.png') 10px center no-repeat;
-	border: 1px solid #F2DD8C;
+	background: #edeaea;
+	border: 2px solid #cc6633;
+        font-weight: bolder;
+        padding: 15px 10px 10px 10px;
+        height: 25px;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        behavior:url(http://localhost/opencart/catalog/view/theme/default/piecss/PIE.htc);
+}
+#notification a {
+    color: #000;
+    font-style: oblique;
+    padding: 7px;
+}
+#notification {
+    position: absolute;
+    z-index: 100;
+    margin-left: 600px;
 }
 .information {
 	background: #E8F6FF url('../image/information.png') 10px center no-repeat;
@@ -1265,6 +1289,7 @@ a.button:hover span {
 	margin: 23px;
         background: #d8d8d8;
         text-align: left;
+        min-height: 430px;
         -webkit-box-shadow: #111111 4px 5px 5px;
         -moz-box-shadow: #111111 4px 5px 5px;
         box-shadow: #111111 4px 5px 5px;
@@ -1279,6 +1304,7 @@ a.button:hover span {
 }
 .product-info > .left + .right {
 	margin-left: 304px;
+        min-height: 535px;
 }
 .product-info .image {
 	float: left;
@@ -1342,7 +1368,6 @@ a.button:hover span {
 }
 .product-info .image-additional {
 	width: 268px;
-	/*clear: both;*/
 	overflow: hidden;
         margin-top: 420px;
 }
@@ -1450,6 +1475,7 @@ a.button:hover span {
         height: 17px;
         display: block;
         float: right;
+        cursor: pointer;
 }
 .product-info .price {
 	overflow: auto;
@@ -1633,7 +1659,7 @@ a.button:hover span {
        font-size: 16px;
        font-weight: lighter;
        overflow: hidden;
-       clear: both;
+       /*clear: both;*/
        margin: 12px 0 12px 0;
 }
 .product-info .product-color .color-text {
@@ -1651,20 +1677,23 @@ a.button:hover span {
 }
 .product-info #talla ul {
        padding: 0;
-       margin: 10px 0 0 0;
+       margin: 10px 0 5px 0;
        width: 280px;
+       overflow: hidden;
 }
 .product-info #talla ul li,
 .product-info #talla ul li.even.even-hover-none
 { 
        color: #b6b4b4;
-       border: solid 1px #bfbfbf;
+       border: solid 2px #bfbfbf;
        cursor: pointer;
        display: block;
        float: left;
        font-size: 14px;
-       margin: 2px 5px;
-       padding: 0 5px;
+       /*margin: 2px 5px;
+       padding: 0 5px;*/
+       margin: 0 5px 5px 5px;
+       padding: 0 5px 0 5px;
        border-radius: 2px;
        -moz-border-radius: 2px;
        -webkit-border-radius: 2px;
@@ -1681,8 +1710,9 @@ a.button:hover span {
 .product-info #talla ul li.talla-correcta,
 .product-info #talla ul li.incorrecta
 {
-      margin-top: 0;
-      border: solid 3px #009933;
+      /*margin-top: 0;*/
+      /*border: solid 3px #009933;*/
+      border: solid 2px #009933;
       background: #D8D8D8;
       color: #666666;
       border-radius: 4px;
@@ -1767,14 +1797,15 @@ a.button:hover span {
 }
 .product-info .product-color ul {
         margin: 8px 0 0 0;
-        padding: 0;
+        padding: 5px 0 5px 0;
+        overflow: hidden;
 }
 .product-info .product-color ul li {
         width: 29px;
         height: 29px;
         display: block;
         float: left;
-        border: solid 3px #fff;
+        border: solid 2px #fff;
         cursor: pointer;
         margin-right: 4px;
 }
@@ -2173,6 +2204,7 @@ a.button:hover span {
 	font-size: 13px;
 	color: #555555;
 	margin-bottom: 15px;
+        width: 680px;
 }
 .checkout-heading a {
 	float: right;
@@ -2191,10 +2223,54 @@ a.button:hover span {
 .checkout-content #shipping-address-existing,
 .checkout-content #shipping-address-new,
 .checkout-content #flat.flat,
-.checkout-content #cod
+.checkout-content #cod,
+#direccion-compra #newsletter,
+#direccion-compra #shipping,
+#direccion-compra #agree
 {
         width: 15px;
         height: 15px;
+}
+#payment-address .checkout-content .left,
+#payment-address .checkout-content .right
+{
+    text-transform: uppercase;
+}
+#payment-address .checkout-content .left input,
+#payment-address .checkout-content .right input {
+    width: 180px;
+}
+#payment-address .checkout-content #direccion-compra.buttons #button-register {
+    text-transform: lowercase;
+}
+#info-inputList {
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+#info-inputList .error {
+    font-size: 11px;
+    clear: both;
+    padding-top: 5px;
+}
+#direccion-compra .right{
+    width: 100%;
+    text-align: left;
+    font-size: 11px;
+}
+#nueva-direccion {
+    clear: both;
+}
+#payment-method .form td {
+    text-align: left;
+}
+.checkout-content #button-address {
+    text-transform: lowercase;
+}
+#payment-new .error {
+    clear: both;
+    font-size: 11px;
+    padding-top: 5px;
+    text-align: left;
 }
 .checkout-content .left {
 	float: left;
@@ -2469,13 +2545,13 @@ a.button:hover span {
         float: right;
 }
 
-#map_canvas,
-#map_photo
+#map
 {
         margin-left: 36px;
         text-align: left;
         clear: both;
 }
+
 #suc-cont .mapPhoto-cont .map-selected {
         color: #fff;
         font-style: italic;
@@ -2610,7 +2686,8 @@ a.button:hover span {
 #button-shipping,
 #button-payment,
 #button-confirm,
-.order-content .button
+.order-content .button,
+#button-register
 {
         width: 55px;
         color: #fff;
@@ -2794,7 +2871,7 @@ a.button:hover span {
 #clienteDisting-cont {
         text-align: center;
 }
-#clienteDisting-cont label {
+#clienteDisting-cont .content-dist {
         margin-top: 10px;
         text-align: left;
         display: block;
@@ -2816,6 +2893,7 @@ a.button:hover span {
 #register h2 {
         color: #cc6633;
         margin-top: 15px;
+        text-align: left;
 }
 #register table tr td:first-child {
         width: 134px;
@@ -2987,4 +3065,10 @@ a.button:hover span {
 }
 .product-info .image .no-jzoom {
     cursor: default;
+}
+/* Pedidos */
+#imprimir-pedido a {
+    color:#CC6633;
+    font-weight: bold;
+    font-style: oblique;
 }

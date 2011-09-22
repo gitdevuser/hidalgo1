@@ -55,9 +55,11 @@ class ModelCatalogCategory extends Model {
                    //Imagenes adicionales
                    $arrCompleto = array();
                    if ( isset( $data['image_cat'] ) ) {
-                   foreach( $data['image_cat'] as $rs_cmp ) {
+                   foreach( $data['image_cat'] as $rskey=>$rs_cmp ) {
                        if ( $rs_cmp !="" ) {
-                            $arrCompleto[] = $rs_cmp;
+                           $selected_1 = '';
+                           if ( $rskey == $data['principal'][0]  ) { $selected_1 = 'selected'; }
+                            $arrCompleto[] = array( 'img_nom'=>$rs_cmp, 'selected' => $selected_1 );
                        }
                    }
                    }
@@ -107,6 +109,13 @@ class ModelCatalogCategory extends Model {
 			}
 		}
 
+                if( isset($data['product_related']) ) {
+                    foreach ($data['product_related'] as $related_id) {
+                    	$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "' AND related_id = '" . (int)$related_id . "'");
+                    	$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$category_id . "', related_id = '" . (int)$related_id . "'");
+                    }
+                }
+
 		if (isset($data['category_layout'])) {
 			foreach ($data['category_layout'] as $store_id => $layout) {
 				if ($layout['layout_id']) {
@@ -123,6 +132,8 @@ class ModelCatalogCategory extends Model {
 	}
 	
 	public function editCategory($category_id, $data) {
+
+            
 
 		$this->db->query("UPDATE " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "',
                                         `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "',
@@ -142,20 +153,22 @@ class ModelCatalogCategory extends Model {
                    $precio = '';
                    $descuento = '';
 		   $imagen_estilo = '';
-                   if ( is_numeric( $data['precio'] ) ) { $precio = $data['precio']; }
-                   if ( is_numeric( $data['descuento'] ) ) { $descuento = $data['descuento']; }
-                   
+                   if ( (isset($data['precio'])) && (is_numeric($data['precio'])) ) { $precio = $data['precio']; }
+                   if ( (isset($data['descuento'])) && (is_numeric($data['descuento'])) ) { $descuento = $data['descuento']; }
+
                    /* Imagenes adicionales */
                    $arrCompleto = array();
                    if ( isset( $data['image_cat'] ) ) {
-                   foreach( $data['image_cat'] as $rs_cmp ) {
+                   foreach( $data['image_cat'] as $rskey=>$rs_cmp ) {
                        if ( $rs_cmp !="" ) {
-                            $arrCompleto[] = $rs_cmp;
+                           $selected_1 = '';
+                           if ( $rskey == $data['principal'][0]  ) { $selected_1 = 'selected'; }
+                            $arrCompleto[] = array( 'img_nom'=>$rs_cmp, 'selected' => $selected_1 );
                        }
                    }
                    }
                    if( count( $arrCompleto ) > 0 ) { $imagen_estilo = serialize( $arrCompleto ); }
-                   
+
                    /*Caracteristicas*/
                    $arrCaract = array();
                    $crt = '';
@@ -167,7 +180,7 @@ class ModelCatalogCategory extends Model {
                    }
                    }
                    if( count( $arrCaract ) > 0 ) { $crt = serialize( $arrCaract ); }
-                   
+
                    /* Columna Izquierda */
                    $arrExtraLeft = array();
                    $extra_left = '';
@@ -182,6 +195,15 @@ class ModelCatalogCategory extends Model {
                    $nombre = $value['name'];
 
                    if( count( $arrExtraLeft ) > 0 ) { $extra_left = serialize( $arrExtraLeft ); }
+                        $composicion = '';
+                        if ( isset($data['composicion']) )  {
+                            $composicion = $this->db->escape($data['composicion']);
+                        }
+                        $cuidado = '';
+                        if ( isset($data['cuidado']) ) { $cuidado = $this->db->escape($data['cuidado']); }
+                        $corte = '';
+                        if ( isset($data['corte']) ) { $corte = $this->db->escape($data['corte']); }
+
 
 			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', 
                                             language_id = '" . (int)$language_id . "',
@@ -190,9 +212,9 @@ class ModelCatalogCategory extends Model {
                                             meta_description = '" . $this->db->escape($value['meta_description']) . "',
                                             description = '" . $this->db->escape($value['description']) . "',
                                             precio = '" . $this->db->escape( $precio ) . "',
-                                            composicion = '" . $this->db->escape($data['composicion']) . "',
-                                            cuidado = '" . $this->db->escape($data['cuidado']) . "',
-                                            corte = '" . $this->db->escape($data['corte']) . "',
+                                            composicion = '" . $composicion . "',
+                                            cuidado = '" . $cuidado . "',
+                                            corte = '" . $corte . "',
                                             caracteristica = '" . $crt . "',
                                             descuento = '" . $this->db->escape( $descuento ) . "',
                                             imagen_estilo = '" . $imagen_estilo . "',
@@ -207,6 +229,13 @@ class ModelCatalogCategory extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "category_to_store SET category_id = '" . (int)$category_id . "', store_id = '" . (int)$store_id . "'");
 			}
 		}
+
+                if( isset($data['product_related']) ) {
+                    $this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "'");
+                    foreach ($data['product_related'] as $related_id) {
+                    	$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$category_id . "', related_id = '" . (int)$related_id . "'");
+                    }
+                }
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
 
@@ -225,6 +254,7 @@ class ModelCatalogCategory extends Model {
 		}
 		
 		$this->cache->delete('category');
+
 	}
 	
 	public function deleteCategory($category_id) {
@@ -248,7 +278,34 @@ class ModelCatalogCategory extends Model {
 		
 		return $query->row;
 	} 
-	
+
+
+	public function getCategoriesRel($data = array()) {
+            if( $data ) {
+                if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
+
+                  $q_cat = $this->db->query( "SELECT * FROM category as tabla1
+                                            LEFT JOIN category_description as tabla2
+                                            ON tabla2.category_id = tabla1.category_id
+                                            WHERE tabla1.parent_id !='0' AND tabla2.name
+                                            LIKE '%".$data['filter_name']."%'
+                                            LIMIT " . (int)$data['start'] . "," . (int)$data['limit']."" );
+
+                  if ( $q_cat->num_rows > 0 ) {
+                        return $q_cat->rows;
+                  } else {
+                        return 0;
+                  }
+                  
+                } else {
+                    return 0;
+                }
+
+            } else {
+                return 0;
+            }
+	}
+
 	public function getCategories($parent_id) {
 		$category_data = $this->cache->get('category.' . $this->config->get('config_language_id') . '.' . $parent_id);
 	

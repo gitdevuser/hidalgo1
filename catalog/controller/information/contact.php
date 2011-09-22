@@ -1,13 +1,70 @@
 <?php 
 class ControllerInformationContact extends Controller {
 	private $error = array(); 
-	    
-  	public function index() {
-		$this->language->load('information/contact');
 
-    	$this->document->setTitle('Cont&aacute;ctanos');
+        public function htmlMail( $nombre, $mail, $msj ) {
+
+            $html = '
+              <style>
+                  #tabla-mail {
+                    border:1px solid #CCCCCC;
+                    font-family: Arial;
+                    line-height: normal;
+                    width: 500px;
+                    color: #666666;
+                  }
+                  #tabla-mail .ttl,
+                  #tabla-mail th
+                  {
+                    text-align: left;
+                    font-weight: bold;
+                    padding: 5px;
+                    color: #000;
+                  }
+                  #tabla-mail th {
+                    background-color: #CC6633;
+                    color: #fff;
+                    text-transform: uppercase;
+                  }
+              </style>
+              <table id="tabla-mail" class="ExternalClass" >
+               <tr>
+                <th colspan="2">Mensaje de contacto</th>
+               </tr>
+               <tr>
+                <td class="ttl" >Nombre:</td>
+                <td>'.$nombre.'</td>
+               </tr>
+               <tr>
+                <td class="ttl">Email:</td>
+                <td>'.$mail.'</td>
+               </tr>
+               <tr>
+                <td valign="top" class="ttl">Mensaje</td>
+                <td>'.$msj.'</td>
+               </tr>
+              </table>';
+
+             return $html;
+
+        }
+
+  	public function index() {
+
+          $this->load->model('catalog/information');
+          $information_info = $this->model_catalog_information->getInformation(6);
+
+
+	$this->language->load('information/contact');
+        $this->document->setTitle( $information_info['title'] );
+        $this->data['heading_title'] = strtoupper( $information_info['title'] );
+        $this->data['desc'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 	 
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+
+                        $coment = html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8');
+
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');
 			$mail->parameter = $this->config->get('config_mail_parameter');
@@ -20,9 +77,8 @@ class ControllerInformationContact extends Controller {
 	  		$mail->setFrom($this->request->post['email']);
 	  		$mail->setSender($this->request->post['name']);
 	  		$mail->setSubject(sprintf($this->language->get('email_subject'), $this->request->post['name']));
-	  		$mail->setText(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));
-      		$mail->send();
-
+	  		$mail->setHtml($this->htmlMail( $this->request->post['name'], $this->request->post['email'], $coment ));
+                        $mail->send();
 	  		$this->redirect($this->url->link('information/contact/success'));
     	}
 
@@ -205,9 +261,9 @@ class ControllerInformationContact extends Controller {
       		$this->error['enquiry'] = $this->language->get('error_enquiry');
     	}
 
-    	if (!isset($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+    	/*if (!isset($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
       		$this->error['captcha'] = $this->language->get('error_captcha');
-    	}
+    	}*/
 		
 		if (!$this->error) {
 	  		return true;

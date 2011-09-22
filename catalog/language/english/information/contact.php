@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']  = 'Contact Us';
+$_['heading_title']  = 'Contáctanos';
 
 // Text 
 $_['text_location']  = 'Our Location';
@@ -9,7 +9,7 @@ $_['text_address']   = 'Address:';
 $_['text_email']     = 'E-Mail:';
 $_['text_telephone'] = 'Tel&eacute;fono';
 $_['text_fax']       = 'Fax:';
-$_['text_message']   = '<p>Your enquiry has been successfully sent to the store owner!</p>';
+$_['text_message']   = '<p>Su consulta ha sido enviado con éxito!</p>';
 
 // Entry Fields
 $_['entry_name']     = 'Nombre';
@@ -26,7 +26,7 @@ $_['email_info'] = 'Para cualquier informaci&oacute;n<br> nos puede enviar un em
 
 
 // Email
-$_['email_subject']  = 'Enquiry %s';
+$_['email_subject']  = 'Consulta %s';
 
 // Errors
 $_['error_name']     = 'Campo Nombre requerido';

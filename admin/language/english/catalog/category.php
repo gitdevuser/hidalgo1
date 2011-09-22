@@ -20,7 +20,7 @@ $_['entry_description']      = 'Descripci&oacute;n:';
 $_['entry_parent']           = 'Categor&iacute;a Padre:';
 $_['entry_store']            = 'Tiendas:';
 $_['entry_keyword']          = 'SEO Keyword:<br/><span class="help">This must be globally unique.</span>';
-$_['entry_image']            = 'Imagen:';
+$_['entry_image']            = 'Imagen de encabezado:<p><span class="help">Tama&ntilde;o recomendado <br>( ancho:770px, alto:110px; ).<p>Se recomienda guardar esta imagen en la subcarpeta "encabezado".</span>';
 $_['entry_top']              = 'Top:<br/><span class="help">Display in the top menu bar. Only works for the top parent categories.</span>';
 $_['entry_column']           = 'Columnas:<br/><span class="help">Number of columns to use for the bottom 3 categories. Only works for the top parent categories.</span>';
 $_['entry_sort_order']       = 'Orden de Clasificaci&oacute;n:';

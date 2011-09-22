@@ -21,10 +21,9 @@ class ControllerAffiliateForgotten extends Controller {
 			$this->model_affiliate_affiliate->editPassword($this->request->post['email'], $password);
 			
 			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-			
 			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
 			$message .= $this->language->get('text_password') . "\n\n";
-			$message .= $password;
+			$message .= '<i><b>'.$password.'</b></i>';
 
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');

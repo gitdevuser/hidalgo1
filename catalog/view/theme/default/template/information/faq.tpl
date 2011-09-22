@@ -12,8 +12,13 @@ $().ready(function(){
   <div class="page-title" >
      <h1><?php echo $heading_title; ?></h1>
   </div>
-  <div class="pages-content" style="margin-bottom: 23px;" >
+  <div class="pages-content pol-venta" style="margin-bottom: 23px;" >
     <div>
+<?php
+if( isset($desc) ) { echo $desc; }
+?>
+
+<!--
 <h1 style="color: #cc6633; font-size: 14px; font-weight: bolder;">SISTEMA DE PAGOS</h1>
 <h1 style="color: #999999; font-size: 14px; font-weight: bolder;" >¿Que tipo de pagos puedo hacer?</h1>
 Se aceptan dos formas de pago: Por PayPal o el portal de banco que aparezca en las opciones de pago en su carrito.
@@ -38,6 +43,9 @@ No, &uacute;nicamente pago en l&iacute;nea con los pagos anteriormente mencionad
 <h1 style="color: #999999; font-size: 14px; font-weight: bolder;" >¿Qu&eacute; necesito para obtener mi factura?</h1>
 En caso de requerir factura le pedimos que mande un correo electr&oacute;nico a la siguiente direcci&oacute;n:
 <a href="#" style="color: #cc6633;" >soporte@trajeshidalgo.mx</a>.En el mail deber&aacute; indicar su n&uacute;mero de pedido as&iacute; como todos los datos fiscales y el correo electr&oacute;nico a donde enviaremos la factura electr&oacute;nica.
+-->
+
+
     </div>
   </div>
   </div>

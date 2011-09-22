@@ -10,7 +10,6 @@
 
     <div class="pages-content" >
 
-
   <?php if ($orders) { ?>
   <?php foreach ($orders as $order) { ?>
   <div class="order-list">

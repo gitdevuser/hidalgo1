@@ -22,11 +22,16 @@ class ModelCatalogProduct extends Model {
                                 LEFT JOIN category_description as table2 ON table1.category_id=table2.category_id
                                 WHERE table1.product_id = '".$product_id."'");
             if ( $query->num_rows > 0 ) {
-                 return $query->row['name'];
+                $name = '';
+                foreach ( $query->rows as $t ) {
+                    $name = $t['name'];
+                }
+                 return $name;
             } else {
                 return false;
             }
         }
+
 
         public function getProductsStyleID($product_id) {
             

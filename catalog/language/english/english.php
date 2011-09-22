@@ -19,7 +19,7 @@ $_['text_pagination']       = '';
 $_['text_separator']        = ' <span class="separator" >&nbsp;</span> ';
 
 // Buttons
-$_['button_add_address']    = 'A&ntilde;nadir direcci6oacute;n';
+$_['button_add_address']    = 'A&ntilde;adir direcci6oacute;n';
 $_['button_back']           = 'Regresar';
 $_['button_continue']       = 'Continuar';
 $_['button_cart']           = 'Comprar';

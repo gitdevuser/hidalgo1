@@ -1,11 +1,76 @@
 <?php
 class ModelAccountCustomer extends Model {
+
+
+        public function htmlMail( $msj ) {
+
+            $html = '
+              <style>
+                  #tabla-mail {
+                    border:1px solid #CCCCCC;
+                    font-family: Arial;
+                    line-height: normal;
+                    width: 500px;
+                    color: #666666;
+                  }
+                  #tabla-mail .ttl,
+                  #tabla-mail th
+                  {
+                    text-align: left;
+                    font-weight: bold;
+                    padding: 5px;
+                    color: #000;
+                  }
+                  #tabla-mail th {
+                    background-color: #CC6633;
+                    color: #fff;
+                    text-transform: uppercase;
+                  }
+                  #tabla-mail td {
+                    padding: 5px;
+                  }
+              </style>
+              <table id="tabla-mail" class="ExternalClass" >
+               <tr>
+                <th colspan="2">Cuenta registrada</th>
+               </tr>
+               <tr>
+                <td>'.$msj.'</td>
+               </tr>
+              </table>';
+
+             return $html;
+
+        }
+
 	public function addCustomer($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', password = '" . $this->db->escape(md5($data['password'])) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "', status = '1', date_added = NOW()");
+
+        $fax = '';
+        $company = '';
+        $address2 = '';
+        if ((isset($fax)) && ($fax !="")) {$fax = $data['fax'];}
+        if ((isset($company)) && ($company!="")) {$company = $data['company'];}
+        if ((isset($address2)) && ($address2!="")) {$address2 = $data['address_2'];}
+
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "',
+                            firstname = '" . $this->db->escape($data['firstname']) . "',
+                            lastname = '" . $this->db->escape($data['lastname']) . "',
+                            email = '" . $this->db->escape($data['email']) . "',
+                            telephone = '" . $this->db->escape($data['telephone']) . "',
+                            fax = '" . $this->db->escape($fax) . "',
+                            password = '" . $this->db->escape(md5($data['password'])) . "',
+                            newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "',
+                            customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "',
+                            status = '1', date_added = NOW()");
       	
 		$customer_id = $this->db->getLastId();
-			
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
+        
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "',
+            firstname = '" . $this->db->escape($data['firstname']) . "',
+            lastname = '" . $this->db->escape($data['lastname']) . "',
+            company = '" . $this->db->escape($company) . "',
+            address_1 = '" . $this->db->escape($data['address_1']) . "',
+            address_2 = '" . $this->db->escape($address2) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
 		
 		$address_id = $this->db->getLastId();
 
@@ -27,10 +92,10 @@ class ModelAccountCustomer extends Model {
 			$message .= $this->language->get('text_approval') . "\n";
 		}
 		
-		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
-		$message .= $this->language->get('text_services') . "\n\n";
-		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name');
+		$message .= "<p>".$this->url->link('account/login', '', 'SSL') . "\n\n"."</p>";
+		$message .= "<p>".$this->language->get('text_services') . "\n\n"."</p>";
+		$message .= "<p>".$this->language->get('text_thanks') . "\n"."</p>";
+		$message .= "<p>".$this->config->get('config_name')."</p>";
 		
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
@@ -44,7 +109,7 @@ class ModelAccountCustomer extends Model {
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender($this->config->get('config_name'));
 		$mail->setSubject($subject);
-		$mail->setText($message);
+		$mail->setHtml($this->htmlMail($message));
 		$mail->send();
 		
 		// Send to main admin email if new account email is enabled

@@ -23,7 +23,7 @@
   <div class="content">
     <ul>
       <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-      <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
+      <!--<li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>-->
     </ul>
   </div>
   </div>

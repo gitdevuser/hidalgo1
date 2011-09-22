@@ -18,9 +18,11 @@
     <div class="content">
       <div id="htabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a>
         <?php if ($customer_id) { ?>
-        <a href="#tab-transaction"><?php echo $tab_transaction; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a>
+        <a href="#tab-transaction"><?php echo $tab_transaction; ?></a>
+        <!--<a href="#tab-reward"><?php echo $tab_reward; ?></a>-->
         <?php } ?>
-        <a href="#tab-ip"><?php echo $tab_ip; ?></a></div>
+        <!--<a href="#tab-ip"><?php echo $tab_ip; ?></a>-->
+        </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <div id="vtabs" class="vtabs"><a href="#tab-customer"><?php echo $tab_general; ?></a>
@@ -60,7 +62,7 @@
                   <span class="error"><?php echo $error_telephone; ?></span>
                   <?php  } ?></td>
               </tr>
-              <tr>
+              <tr style="display: none;">
                 <td><?php echo $entry_fax; ?></td>
                 <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
               </tr>
@@ -79,7 +81,7 @@
                   <span class="error"><?php echo $error_confirm; ?></span>
                   <?php  } ?></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><?php echo $entry_newsletter; ?></td>
                 <td><select name="newsletter">
                     <?php if ($newsletter) { ?>
@@ -91,7 +93,7 @@
                     <?php } ?>
                   </select></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><?php echo $entry_customer_group; ?></td>
                 <td><select name="customer_group_id">
                     <?php foreach ($customer_groups as $customer_group) { ?>
@@ -147,7 +149,7 @@
                   <span class="error"><?php echo $error_address_address_1[$address_row]; ?></span>
                   <?php } ?></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><?php echo $entry_address_2; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_2]" value="<?php echo $address['address_2']; ?>" /></td>
               </tr>
@@ -162,7 +164,7 @@
                 <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][postcode]" value="<?php echo $address['postcode']; ?>" /></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><span class="required">*</span> <?php echo $entry_country; ?></td>
                 <td><select name="address[<?php echo $address_row; ?>][country_id]" id="address[<?php echo $address_row; ?>][country_id]" onchange="$('select[name=\'address[<?php echo $address_row; ?>][zone_id]\']').load('index.php?route=sale/customer/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=<?php echo $address['zone_id']; ?>');">
                     <option value=""><?php echo $text_select; ?></option>
@@ -221,7 +223,7 @@
           </table>
           <div id="transaction"></div>
         </div>
-        <div id="tab-reward">
+        <div id="tab-reward" style="display: none;">
           <table class="form">
             <tr>
               <td><?php echo $entry_description; ?></td>
@@ -238,7 +240,7 @@
           <div id="reward"></div>
         </div>
         <?php } ?>
-        <div id="tab-ip">
+        <div id="tab-ip" style="display:none;">
           <table class="list">
             <thead>
               <tr>
@@ -291,7 +293,7 @@ function addAddress() {
     html += '      <td><?php echo $entry_address_1; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][address_1]" value="" /></td>';
     html += '    </tr>';
-    html += '    <tr>';
+    html += '    <tr style="display:none;" >';
     html += '      <td><?php echo $entry_address_2; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][address_2]" value="" /></td>';
     html += '    </tr>';

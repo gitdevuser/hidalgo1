@@ -25,13 +25,14 @@
 <br />
 <?php if ($text_agree) { ?>
 <div class="buttons">
-  <div class="right"><?php echo $text_agree; ?>
+  <div class="right">
+    <?php echo $text_agree; ?>
     <?php if ($agree) { ?>
-    <input type="checkbox" name="agree" value="1" checked="checked" />
+    <input type="checkbox" name="agree" value="1" checked="checked" style="width:10px; height: 10px;" />
     <?php } else { ?>
-    <input type="checkbox" name="agree" value="1" />
+    <input type="checkbox" name="agree" value="1" style="width:10px; height: 10px;" />
     <?php } ?>
-    <a id="button-payment" class="button"><span><?php echo $button_continue; ?></span></a></div>
+    <a id="button-payment" class="button"><?php echo $button_continue; ?></a></div>
 </div>
 <?php } else { ?>
 <div class="buttons">

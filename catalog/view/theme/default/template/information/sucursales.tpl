@@ -3,14 +3,16 @@
 $().ready(function(){
     menu_select(2);
 });
+var maps1 = new Array();
+<?php foreach ( $sucursales as $key=>$rs   ) { ?>
+    maps1[<?php echo $key ?>] = {'lat': <?php echo $rs['mapa']['lat']; ?>, 'long': <?php echo $rs['mapa']['long']; ?>};
+<?php } ?>
 </script>
-<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>--->
-
 
 <div id="content">
 <div class="top-shadow" >&nbsp;</div>
 <?php echo $content_top; ?>
-  
+
   <div id="suc-cont" >
     <div class="suc-title" >
        <h1><?php echo $heading_title; ?></h1>
@@ -27,10 +29,10 @@ $().ready(function(){
        </ul>
        <div class="mapPhoto-cont" >
          <a href="#" class="maps" >Mapa [+]</a> |
-         <a href="http://localhost/opencart/image/cache/data/macbook_1-80x80.jpg" class="photo">Foto [+]</a>
+         <a href="./image/<?php echo $sucursales[0]['foto']; ?>" class="photo fancybox" title="Matriz" rel="fancybox">Foto [+]</a>
        </div>
     </div><!--Matriz-->
-    
+
     <div class="suc-info" >
        <h1>Sucursal Galer&iacute;as Coapa</h1>
        <ul>
@@ -42,7 +44,7 @@ $().ready(function(){
        </ul>
        <div class="mapPhoto-cont" >
          <a href="#" class="maps">Mapa [+]</a> |
-         <a href="http://localhost/opencart/image/cache/data/macbook_1-80x80.jpg" class="photo" >Foto [+]</a>
+         <a href="./image/<?php echo $sucursales[1]['foto']; ?>" class="photo fancybox" title="Sucursal Galerías Coapa" rel="fancybox"  >Foto [+]</a>
        </div>
     </div><!--Gallerias Coapa -->
 
@@ -58,10 +60,9 @@ $().ready(function(){
        </ul>
        <div class="mapPhoto-cont" >
          <a href="#" class="maps">Mapa [+]</a> |
-         <a href="http://localhost/opencart/image/cache/data/macbook_1-80x80.jpg" class="photo">Foto [+]</a>
+         <a href="./image/<?php echo $sucursales[2]['foto']; ?>" class="photo fancybox" title="Sucursal Las Flores" rel="fancybox">Foto [+]</a>
        </div>
     </div><!--Las Flores -->
-
 
 	<style type="text/css" media="screen">
 			#map { float:left; width:500px; height:500px; }
@@ -71,21 +72,14 @@ $().ready(function(){
 			#list li:hover { background:#555; color:#fff; cursor:pointer; cursor:hand; }
 		</style>
 
-    <div id="map" style="width:700px; height:383px;"></div>
-                    <ul id="list"></ul>
-
-    <div id="map_photo" ></div>
+                <div id="map" style="width:700px; height:383px;"></div>
 
   </div>
 
-
-		<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAZBe7uHI90ESk2XAmWRL3RxR6u04U0tImA3bfwZ3-HKdEno7z2xRk2YE6OkudtBX5qy0vLrgbf1DUCg"></script>
-		<script type="text/javascript">
-		google.load("maps", "2.x");
-		</script>
-
-
-<script src="catalog/view/javascript/sucursales.js" type="text/javascript"></script>
-
+  <script type="text/javascript" src="<?php echo GM_API; ?>"></script>
+  <script type="text/javascript">
+    google.load("maps", "2.x");
+  </script>
+  <script src="catalog/view/javascript/sucursales.js" type="text/javascript"></script>
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

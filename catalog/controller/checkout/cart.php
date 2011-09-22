@@ -48,7 +48,8 @@ class ControllerCheckoutCart extends Controller {
 				$this->redirect($this->url->link('checkout/cart'));
 			}
     	}
-
+        
+   
     	$this->document->setTitle($this->language->get('heading_title'));
 
       	$this->data['breadcrumbs'] = array();
@@ -120,7 +121,6 @@ class ControllerCheckoutCart extends Controller {
 
       		$this->data['products'] = array();
                 
-
       		foreach ($this->cart->getProducts() as $result) {
 
 				if ($result['image']) {
@@ -163,9 +163,12 @@ class ControllerCheckoutCart extends Controller {
 
                         foreach( $catDesc as $desc_var=>$key ) {
                                  $dec_precio = $key['precio'];
+                                 if ( isset( $key['descuento'] ) )  {
+                                    $dec_precio = ( $key['precio'] - ( $key['precio'] * ( $key['descuento'] / 100 ) ) );
+                                 }
                                  $dec_nombre = $key['name'];
                         }
-                        
+
                         foreach ( $resultsStyle as $rel_item ) {
                                   if ( $rel_item['product_id'] == $result['product_id'] ) {
 
@@ -196,6 +199,16 @@ class ControllerCheckoutCart extends Controller {
 					$total = false;
 				}
 
+
+                                $t = $this->db->query( "SELECT * FROM product_to_category as tabla1
+                                                        LEFT JOIN category as tabla2
+                                                        ON tabla1.category_id = tabla2.category_id
+                                                        WHERE tabla1.product_id = '".$result['product_id']."'" );
+                                if ( $t->num_rows > 0 ) {
+                                     $parent_id = $t->row['parent_id'];
+                                     $cat_id = $t->row['category_id'];
+                                }
+
         		$this->data['products'][] = array(
           			'key'      => $result['key'],
           			'thumb'    => $image,
@@ -207,7 +220,8 @@ class ControllerCheckoutCart extends Controller {
 					'points'   => ($result['points'] ? sprintf($this->language->get('text_points'), $result['points']) : ''),
 					'price'    => $price,
 					'total'    => $total,
-					'href'     => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+					/*'href'     => $this->url->link('product/product', 'product_id=' . $result['product_id']),*/
+                            'href'     => $this->url->link('product/category', '&path=' .$parent_id.'_'.$cat_id ),
                             'talla' => $talla,
                             'subtalla' => $subtalla,
                             'color' => $color
@@ -379,7 +393,7 @@ class ControllerCheckoutCart extends Controller {
 			if (!isset($json['error'])) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option);
 
-				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']), $product_info['name'], $this->url->link('checkout/cart'));
+				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('checkout/cart'), $product_info['name'], $this->url->link('checkout/cart'));
 
 				unset($this->session->data['shipping_methods']);
 				unset($this->session->data['shipping_method']);
@@ -437,7 +451,7 @@ class ControllerCheckoutCart extends Controller {
 					);
 				}
 			}
-
+                        
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
 				$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
 			} else {

@@ -1,24 +1,24 @@
 <?php
 // Heading
-$_['heading_title']     = 'Shipping Report';
+$_['heading_title']     = 'Informe de Envío';
 
 // Text
-$_['text_year']         = 'Years';
-$_['text_month']        = 'Months';
-$_['text_week']         = 'Weeks';
-$_['text_day']          = 'Days';
-$_['text_all_status']   = 'All Statuses';
+$_['text_year']         = 'Años';
+$_['text_month']        = 'Meses';
+$_['text_week']         = 'Semanas';
+$_['text_day']          = 'Días';
+$_['text_all_status']   = 'Todos los estatus';
 
 // Column
-$_['column_date_start'] = 'Date Start';
-$_['column_date_end']   = 'Date End';
-$_['column_title']      = 'Shipping Title';
-$_['column_orders']     = 'No. Orders';
+$_['column_date_start'] = 'Fecha Incio';
+$_['column_date_end']   = 'Fecha fin';
+$_['column_title']      = 'Nombre de Compra';
+$_['column_orders']     = 'No. de Orden';
 $_['column_total']      = 'Total';
 
 // Entry
-$_['entry_date_start']  = 'Date Start:';
-$_['entry_date_end']    = 'Date End:';
-$_['entry_group']       = 'Group By:';
-$_['entry_status']      = 'Order Status:';
+$_['entry_date_start']  = 'Fecha inicio:';
+$_['entry_date_end']    = 'Fecha fin:';
+$_['entry_group']       = 'Ordenar por:';
+$_['entry_status']      = 'Ordenar por estatus:';
 ?>

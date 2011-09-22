@@ -30,10 +30,10 @@
             <td><?php echo $text_store_name; ?></td>
             <td><?php echo $store_name; ?></td>
           </tr>
-          <tr>
+          <!--<tr>
             <td><?php echo $text_store_url; ?></td>
             <td><a onclick="window.open('<?php echo $store_url; ?>');"><u><?php echo $store_url; ?></u></a></td>
-          </tr>
+          </tr>-->
           <?php if ($customer) { ?>
           <tr>
             <td><?php echo $text_customer; ?></td>

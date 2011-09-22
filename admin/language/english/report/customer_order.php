@@ -1,22 +1,22 @@
 <?php
 // Heading
-$_['heading_title']         = 'Customer Orders Report';
+$_['heading_title']         = 'Reporte Ordenes de Clientes';
 
 // Text
-$_['text_all_status']       = 'All Statuses';
+$_['text_all_status']       = 'Todos los estus';
 
 // Column
-$_['column_customer']       = 'Customer Name';
+$_['column_customer']       = 'Nombre del cliente';
 $_['column_email']          = 'E-Mail';
-$_['column_customer_group'] = 'Customer Group';
-$_['column_status']         = 'Status';
-$_['column_orders']         = 'No. Orders';
-$_['column_products']       = 'No. Products';
+$_['column_customer_group'] = 'Grupo de clientes';
+$_['column_status']         = 'Estatus';
+$_['column_orders']         = 'No. de Orden';
+$_['column_products']       = 'No. de Productos';
 $_['column_total']          = 'Total';
-$_['column_action']         = 'Action';
+$_['column_action']         = 'Acción';
 
 // Entry
-$_['entry_date_start']      = 'Date Start:';
-$_['entry_date_end']        = 'Date End:';
-$_['entry_status']          = 'Order Status:';
+$_['entry_date_start']      = 'Fecha inicio:';
+$_['entry_date_end']        = 'Fecha fin:';
+$_['entry_status']          = 'Estatus Orden:';
 ?>

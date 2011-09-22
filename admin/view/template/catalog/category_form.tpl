@@ -18,9 +18,12 @@
           <a href="#tab-general"><?php echo $tab_general; ?></a>
           <a href="#tab-data"><?php echo $tab_data; ?></a>
           <!--<a href="#tab-design"><?php echo $tab_design; ?></a>-->
+          <?php if ( $parent_id != 0 ) {  ?>
           <a href="#tab-detalle">Detalle del Producto</a>
           <a href="#tab-precio">Precio</a>
           <a href="#tab-img">Imagenes</a>
+          <?php } ?>
+          <?php if ( $parent_id == 0 ) { } ?>
           <a href="#tab-col-izq">Columna Izquierda</a>
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -40,11 +43,11 @@
                   <span class="error"><?php echo $error_name[$language['language_id']]; ?></span>
                   <?php } ?></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><?php echo $entry_meta_description; ?></td>
                 <td><textarea name="category_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
               </tr>
-              <tr>
+              <tr style="display:none;">
                 <td><?php echo $entry_meta_keyword; ?></td>
                 <td><textarea name="category_description[<?php echo $language['language_id']; ?>][meta_keyword]" cols="40" rows="5"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea></td>
               </tr>
@@ -102,11 +105,13 @@
               <td><?php echo $entry_keyword; ?></td>
               <td><input type="hidden" name="keyword" value="<?php echo $keyword; ?>" /></td>
             </tr>
+            <?php if ($parent_id == 0 ) { ?>
             <tr>
               <td><?php echo $entry_image; ?></td>
               <td valign="top"><input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
                 <img src="<?php echo $preview; ?>" alt="" id="preview" class="image" onclick="image_upload('image', 'preview');" /></td>
             </tr>
+            <?php } ?>
             <tr style="display: none;">
               <td><?php echo $entry_top; ?></td>
               <td><?php if ($top) { ?>
@@ -136,8 +141,32 @@
                 </select></td>
             </tr>
 
+            <?php if ( $parent_id !=0 ) {  ?>
+            <tr>
+              <td valign="top">Productos relacionados</td>
+              <td valign="top">
+                  <div>
+                   <input type="text" name="related" >
+                  </div>
+                  <br>
+                  <div id="product-related" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($product_related as $product_related) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="product-related<?php echo $product_related['related_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_related['name']; ?><img src="view/image/delete.png" />
+                    <input type="hidden" name="product_related[]" value="<?php echo $product_related['related_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                  </div>
+              </td>
+            </tr>
+            <?php } ?>
+
+
           </table>
         </div>
+
+          
         <div id="tab-design" style="display: none;" >
           <table class="list">
             <thead>
@@ -181,6 +210,7 @@
           </table>
         </div>
 
+        <?php if ( $parent_id !=0 ) {  ?>
         <div id="tab-detalle" >
 
           <table class="list">
@@ -197,13 +227,13 @@
                     <tr>
                      <td>Composici&oacute;n</td>
                      <td>
-                       <input type="text" name="composicion" value="<?php echo $composicion; ?>" />
+                       <input type="text" name="composicion" value="<?php if(isset($composicion)){echo $composicion;} ?>" />
                      </td>
                     </tr>
                     <tr>
                      <td>Cuidado</td>
                      <td>
-                       <input type="text" name="cuidado" value="<?php echo $cuidado; ?>" />
+                       <input type="text" name="cuidado" value="<?php if(isset($cuid)){ echo $cuid; } ?>" />
                      </td>
                     </tr>
                   </table>
@@ -226,7 +256,7 @@
                     <tr>
                      <td>Corte</td>
                      <td>
-                       <textarea name="corte" ><?php echo $corte; ?></textarea>
+                       <textarea name="corte" ><?php if(isset($corte)){echo $corte;} ?></textarea>
                      </td>
                     </tr>
                   </table>
@@ -262,7 +292,9 @@
           </table><!-- Corte -->
 
         </div>
+       <?php } ?>
 
+        <?php if ( $parent_id !=0 ) {  ?>
         <div id="tab-precio" >
 
           <table class="list">
@@ -294,19 +326,22 @@
           </table><!-- Precio -->
 
         </div><!--Precio-->
+        <?php } ?>
 
+        <?php if ( $parent_id !=0 ) {  ?>
         <div id="tab-img" >
-          <table class="list" id="imagen01" >
+          <table class="list" id="imagen01" style="width:800px;" >
             <thead>
               <tr>
-                <td class="left" colspan="2" >Imagenes</td>
+                <td class="left" >Imagen</td>
+                <td class="left" >Principal</td>
+                <td class="left" colspan="2" ></td>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <td class="left"></td>
-                <td></td>
+                <td class="left" colspan="4"></td>
               </tr>
            </tbody>
 
@@ -315,23 +350,41 @@
             $e = 0;
             $y = 0;
             if ( $imagen_estilo ) {
-
             foreach ( unserialize( $imagen_estilo ) as $rs1 ) {
                     $y = $e++;
-                    $resize_img = $this->model_tool_image->resize($rs1, 100, 100);
+                    $resize_img = $this->model_tool_image->resize($rs1['img_nom'], 100, 100);
             ?>
-            <tbody><tr><td>
+            <tbody class="imagen-estilo<?php echo $y; ?>" >
+                <tr>
+                    <td>
                <img onclick="image_upload('image<?php echo $y; ?>', 'preview<?php echo $y; ?>');" 
                         class="image<?php echo $y; ?>" id="preview<?php echo $y; ?>"
                         alt="" src="<?php echo $resize_img; ?>">
-              </td><td><input type="hidden" id="image<?php echo $y; ?>"
-                              value="<?php echo $rs1; ?>" name="image_cat[]"></td>
+
+               <input type="hidden" id="image<?php echo $y; ?>"
+                              value="<?php echo $rs1['img_nom']; ?>" name="image_cat[]">
+              </td>
+
+              <td>
+                <input type="radio" name="principal[]" value="<?php echo $y; ?>" <?php if ( $rs1['selected'] ) { echo "CHECKED"; } ?> >
+              </td>
+
+              <td>
+               <a href="#" class="button eliminar-imagen<?php echo $y; ?>" onClick="eliminarImagen(<?php echo $y; ?>); return false;" >
+                 <span>Eliminar Imagen</span>
+               </a>
+              </td>
+
+              <td></td>
+              
              </tr>
             </tbody>
             <?php } } ?>
 
             <tfoot>
               <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td class="left">
                     <a href="#" class="button anadir_imagen" >
@@ -343,7 +396,11 @@
 
           </table><!-- imagenes -->
         </div>
+        <?php } ?>
 
+
+        <?php if ( $parent_id == 0 ) {  ?>
+        <?php } ?>
         <div id="tab-col-izq" >
           <table class="list" >
             <thead>
@@ -385,7 +442,7 @@
               </tr>
            </tbody>
 
-          </table><!-- imagenes -->
+          </table><!-- left extra module -->
         </div>
         
 
@@ -397,18 +454,65 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript"><!--
+$('input[name=\'related\']').autocomplete({
+	delay: 0,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/category/autocompleto&token=<?php echo $token; ?>',
+			type: 'POST',
+			dataType: 'json',
+			data: 'filter_name=' +  encodeURIComponent(request.term),
+			success: function(data) {
+				response($.map(data, function(item) {
+					return {
+						label: item.name,
+						value: item.category_id
+					}
+				}));
+			}
+		});
+
+	},
+	select: function(event, ui) {
+		$('#product-related' + ui.item.value).remove();
+
+		$('#product-related').append('<div id="product-related' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" /><input type="hidden" name="product_related[]" value="' + ui.item.value + '" /></div>');
+
+		$('#product-related div:odd').attr('class', 'odd');
+		$('#product-related div:even').attr('class', 'even');
+
+		return false;
+	}
+});
+
+$('#product-related div img').live('click', function() {
+	$(this).parent().remove();
+
+	$('#product-related div:odd').attr('class', 'odd');
+	$('#product-related div:even').attr('class', 'even');
+});
+//--></script>
 <script type="text/javascript"><!--
 var row_val = <?php echo $y+1; ?>;
 $( '.anadir_imagen' ).click(function(){
-    img1 = '<tbody><tr><td>\n\
+    img1 = '<tbody class="imagen-estilo'+row_val+'" ><tr><td>\n\
                <img src="<?php echo $preview; ?>" alt="" id="preview'+row_val+'" class="image'+row_val+'" onclick="image_upload(\'image'+row_val+'\', \'preview'+row_val+'\');" />\n\
-              </td><td><input type="text" name="image_cat[]" value="" id="image' + row_val + '" /></td>\n\
-             </tr>\n\
-            </tbody>';
+              <input type="hidden" name="image_cat[]" value="" id="image' + row_val + '" /></td>\n\
+              <td><input type="radio" name="principal[]"></td>\n\
+              <td><a href="#" class="button eliminar-imagen" onClick="eliminarImagen('+row_val+'); return false;" ><span>Eliminar Imagen</span></a></td>\n\
+              <td></td></tr></tbody>';
       $('#imagen01 tfoot').before(img1);
    row_val++;
    return false;
 });
+
+function eliminarImagen( value ) {
+    $( '.imagen-estilo'+value ).remove();
+}
+
 //--></script> 
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
@@ -430,7 +534,6 @@ $(function(){
        $( this ).before( html_var );
        return false;
     });
-
     $( '.nombre-cat' ).change(function(){
         $( 'input=[name="keyword"]' ).val( $( this ).val() );
     });

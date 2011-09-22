@@ -36,7 +36,7 @@ class ControllerProductProduct extends Controller {
 				}
 			}
 		}
-		
+
 		$this->load->model('catalog/manufacturer');	
 		
 		if (isset($this->request->get['manufacturer_id'])) {
@@ -264,7 +264,7 @@ class ControllerProductProduct extends Controller {
 
                                  $textura = '';
                                  if ( $rel_item['color'] ) {
-                                      $textura = $this->model_tool_image->resize($rel_item['color'], 29, 29);
+                                      $textura = $this->model_tool_image->resize($rel_item['color'], 160, 180);
                                  }
                                  $talla = '';
                                  if ( $rel_item['talla'] ) {

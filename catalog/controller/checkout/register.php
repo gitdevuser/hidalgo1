@@ -68,7 +68,18 @@ class ControllerCheckoutRegister extends Controller {
 				if ($this->request->post['confirm'] != $this->request->post['password']) {
 					$json['error']['confirm'] = $this->language->get('error_confirm');
 				}
-				
+
+                                /*Composturas*/
+				if ($this->request->post['si_comp'] != '') {
+                                    $q_compostura = $this->db->query( 'SELECT * FROM compostura' );
+                                    if ( $q_compostura->num_rows > 0 ) {
+                                        if ( $q_compostura->num_rows > 0 ) {
+                                            $this->data['compostura'] = $q_compostura->rows;
+                                        }
+                                    }
+
+				}
+
 				if ($this->config->get('config_account_id')) {
 					$this->load->model('catalog/information');
 					
@@ -125,7 +136,13 @@ class ControllerCheckoutRegister extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 	
 			$this->data['country_id'] = $this->config->get('config_country_id');
-	
+
+                        $this->data['compostura'] = '';
+                        $q_compostura = $this->db->query( 'SELECT * FROM compostura' );
+                        if ( $q_compostura->num_rows > 0 ) {
+                             $this->data['compostura'] = $q_compostura->rows;
+                        }
+
 			$this->load->model('localisation/country');
 			
 			$this->data['countries'] = $this->model_localisation_country->getCountries();

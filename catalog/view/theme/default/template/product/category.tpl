@@ -2,92 +2,49 @@
 <div id="content">
 <div class="top-shadow" >&nbsp;</div>
 <?php echo $content_top; ?>
-  <!--<div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>-->
 
   <div id="list-header" style="background: url(<?php echo $thumb; ?>) no-repeat;" ><?php echo $heading_title; ?></div>
-  
-  <?php if ($thumb || $description) { ?>
-  <!--<div class="category-info">
-    <?php if ($thumb) { ?>
-    <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
-    <?php } ?>
-    <?php if ($description) { ?>
-    <?php echo $description; ?>
-    <?php } ?>
-  </div>-->
-  <?php } ?>
 
   <?php if ($categories) { ?>
-  <div class="category-list" style="display: none;" ><!-- !Important, subategorias de Categoria-->
-    <?php if (count($categories) <= 5) { ?>
-    <ul>
-      <?php foreach ($categories as $category) { ?>
-      <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
-      <?php } ?>
-    </ul>
-    <?php } else { ?>
-    <?php for ($i = 0; $i < count($categories);) { ?>
-    <ul>
-      <?php $j = $i + ceil(count($categories) / 4); ?>
-      <?php for (; $i < $j; $i++) { ?>
-      <?php if (isset($categories[$i])) { ?>
-      <li><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
-      <?php } ?>
-      <?php } ?>
-    </ul>
-    <?php } ?>
-    <?php } ?>
-  </div>
-  <?php } ?>
+  <div class="category-list" style="display: block;" ><!-- !Important, subategorias de Categoria-->
 
-  <?php if ($products) { ?>
-  
-    <div class="product-list">
-
-    <?php foreach ($products as $product) { ?>
+<div class="product-list">
+   <?php foreach ($categories as $category) {  ?>
+   
     <div>
-	<?php if( $product['descuento'] ) { ?>
-      <div class="descuentos" name="<?php echo $product['href']; ?>" >-<?php echo $product['descuento']; ?>%</div>
-	<?php } ?>
-
-      <?php if ($product['thumb']) { ?>
-      <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
-      <?php } else { ?>
-      <div class="image"><a href="<?php echo $product['href']; ?>"><img src="catalog/view/theme/default/image/sin.jpg" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
-	  <?php } ?>
+      <?php if ( $category['descuento'] ) { ?>
+       <div class="descuentos" name="<?php echo $category['href']; ?>" >-<?php echo $category['descuento']; ?>%</div>
+      <?php } ?>
+       
+      <div class="image">
+        <?php if ( $category['imagen'] ) { ?>
+          <a href="<?php echo $category['href']; ?>"><img src="<?php echo $category['imagen']; ?>" title="<?php echo $category['name']; ?>" alt="<?php echo $category['name']; ?>" /></a>
+        <?php } else { ?>
+          <a href="<?php echo $category['href']; ?>"><img src="catalog/view/theme/default/image/sin.jpg" title="#" alt="#" /></a>
+        <?php } ?>
+      </div>
 
       <div class="name">
-        <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+        <a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
       </div>
+       
       <div class="description"></div>
-
       <div class="cart">
-       <a href="<?php echo $product['href']; ?>" class="button detalle"><span><?php echo $button_detalle; ?></span></a>
-       <?php if ($product['price']) { ?>
-        <div class="price">
-          <?php if (!$product['special']) { ?>
-          <?php echo $product['price']; ?>
-          <?php } else { ?>
-            <span class="price-new"><?php echo $product['special']; ?></span>
-          <?php } ?>
+       <a href="<?php echo $category['href']; ?>" class="button detalle"><span>Detalle</span></a>
+         <div class="price">
+             <?php echo $category['precio']; ?>
          </div>
-       <?php } ?>
-
       </div>
-      <div class="wishlist"></div>
-      <div class="compare"></div>
     </div>
-
-    <?php } ?>
-  </div>
-
-
-  <div class="pagination"><?php echo $pagination; ?></div>
+  
   <?php } ?>
+</div>
+<?php } ?>
+
+  </div>
+  
+
+
   <?php if (!$categories && !$products) { ?>
   
   <div class="content" style="border:none;">
@@ -111,6 +68,7 @@
 <script type="text/javascript"><!--
 $( '.descuentos' ).click(function(){ document.location.href=$(this).attr( 'name' ); });
 $( '.comprar' ).click(function(){ document.location.href='carrito-de-compra'; });
+
 function display(view) {
 	if (view == 'list') {
 		$('.product-grid').attr('class', 'product-list');

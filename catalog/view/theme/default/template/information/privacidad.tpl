@@ -14,7 +14,8 @@ $().ready(function(){
   </div>
   <div class="pages-content" style="margin-bottom: 23px;" >
     <div>
-    <span style="color: #000; font-size: 14px;" >
+    <?php if( isset($desc) ) { echo $desc; } ?>
+    <!--<span style="color: #000; font-size: 14px;" >
 En cumplimiento con la Ley Federal de Protecci&oacute;n de Datos Personales en posesi&oacute;n de los Particulares y con el fin de Asegurar la protecci&oacute;n y privacidad de los datos personales, as&iacute; como
 regular el acceso, rectificaci&oacute;n, cancelaci&oacute; y oposici&oacute;n de los mismos HIDALGO, S.A. DE C.V. propietario de Tienda de ropa HIDALGO&copy; establece el siguente:
     </span>
@@ -35,7 +36,7 @@ As&iacute; mismo le informamos que sus datos personales NO pueden ser transferid
 <p>
 </span>
 <span style="color:#cc6633; text-align: left; font-size: 14px;" >
-  La pol&iacute;tica de Privacidad y los cambios en el presente aviso se publicar&aacute;n en nuestra p&aacute;gina <a href="#" style="color:#cc6633;" >www.trajeshidalgo.mx</a></span>
+  La pol&iacute;tica de Privacidad y los cambios en el presente aviso se publicar&aacute;n en nuestra p&aacute;gina <a href="#" style="color:#cc6633;" >www.trajeshidalgo.mx</a></span>-->
 
     </div>
 

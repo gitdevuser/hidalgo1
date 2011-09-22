@@ -3,8 +3,13 @@ class ControllerInformationFormaspago extends Controller {
 	private $error = array(); 
 	    
   	public function index() {
-		$this->document->setTitle( 'Formas de Pago y seguridad' );
-                $this->data['heading_title'] = 'FORMAS DE PAGO Y SEGURIDAD';
+
+                $desc = $this->db->query( "SELECT * FROM information_description WHERE information_id = '10'" );
+
+                $this->document->setTitle( $desc->row['title'] );
+                $this->data['heading_title'] = strtoupper( $desc->row['title'] );
+                $this->data['desc'] = html_entity_decode($desc->row['description'], ENT_QUOTES, 'UTF-8');
+
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/formaspago.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/information/formaspago.tpl';

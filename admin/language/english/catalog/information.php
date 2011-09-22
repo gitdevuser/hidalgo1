@@ -3,7 +3,7 @@
 $_['heading_title']     = 'Informaci&oacute;n';
 
 // Text
-$_['text_success']      = 'Ha modificado la informaci&ocute;n!';
+$_['text_success']      = 'Ha modificado la informaci&oacute;n!';
 $_['text_default']      = 'Default';
 
 // Column

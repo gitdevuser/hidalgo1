@@ -4,7 +4,7 @@
              <tr>
                 <td colspan="2" class="atr-detailProd-title" >
                     <?php echo 'Tabla de Trajes y Sacos';  ?>
-                    <a href="#" class="close-atribute talla-tabla" ></a>
+                    <img class="close-atribute talla-tabla" src="catalog/view/theme/default/image/close-atribute.png" >
                 </td>
              </tr>
             </thead>

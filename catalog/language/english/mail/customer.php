@@ -1,9 +1,9 @@
 <?php
 // Text
-$_['text_subject']  = '%s - Thank you for registering';
-$_['text_welcome']  = 'Welcome and thank you for registering at %s!';
-$_['text_login']    = 'Your account has now been created and you can log in by using your email address and password by visiting our website or at the following URL:';
-$_['text_approval'] = 'Your account must be approved before you can login. Once approved you can log in by using your email address and password by visiting our website or at the following URL:';
-$_['text_services'] = 'Upon logging in, you will be able to access other services including reviewing past orders, printing invoices and editing your account information.';
-$_['text_thanks']   = 'Thanks,';
+$_['text_subject']  = '%s - Gracias por registrarse';
+$_['text_welcome']  = 'Bienvenido y gracias por registrarse en %s!';
+$_['text_login']    = 'Su cuenta ha sido creada y puede iniciar sesión utilizando su dirección de correo electrónico y la contraseña al visitar nuestro sitio web o en la siguiente URL:';
+$_['text_approval'] = 'Su cuenta debe ser aprobado antes de poder iniciar sesión. Una vez aprobada, usted puede iniciar sesión utilizando su dirección de correo electrónico y la contraseña al visitar nuestro sitio web o en la siguiente URL:';
+$_['text_services'] = 'Al iniciar la sesión, usted será capaz de acceder a otros servicios incluyendo la revisión de pedidos anteriores y edición de información de su cuenta.';
+$_['text_thanks']   = 'Gracias,';
 ?>

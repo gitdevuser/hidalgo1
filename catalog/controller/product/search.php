@@ -201,16 +201,17 @@ class ControllerProductSearch extends Controller {
 				'filter_sub_category' => $filter_sub_category, 
 				'sort'                => $sort,
 				'order'               => $order,
-				'start'               => ($page - 1) * $limit,
-				'limit'               => $limit
+				/*'start'               => ($page - 1) * $limit,
+				'limit'               => $limit*/
 			);
 					
 			$product_total = $this->model_catalog_product->getTotalProducts($data);
-								
 			$results = $this->model_catalog_product->getProducts($data);
-					
+                        
+                        $arrDesp = array();
+                        $arrCat = array();
 			foreach ($results as $result) {
-				if ($result['image']) {
+				/*if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
 				} else {
 					$image = false;
@@ -256,10 +257,39 @@ class ControllerProductSearch extends Controller {
                                     $name = $result['model'];
                                 } else {
                                     $name = false;
+                                }*/
+
+                                $q_parent = $this->db->query("SELECT * FROM product_to_category as tabla1
+                                                              JOIN category_description as tabla2
+                                                              ON tabla2.category_id = tabla1.category_id
+                                                              JOIN category as tabla3
+                                                              ON tabla3.category_id = tabla2.category_id
+                                                              WHERE product_id = '".$result['product_id']."'");
+                                
+                                if ( $q_parent->num_rows > 0  ) {
+                                  foreach ( $q_parent->rows as $rs ) {
+                                         $arrCat[] = $rs['category_id'];
+                                         $thumb = '';
+                                         if ( ($rs['imagen_estilo'] !="") && (count($rs['imagen_estilo']) > 0 ) ) {
+                                              foreach( unserialize($rs['imagen_estilo']) as $rs_img ) {
+                                                if( $rs_img['selected'] == 'selected' )  {
+                                                    $thumb = $this->model_tool_image->resize($rs_img['img_nom'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+                                                }
+                                              }
+                                         }
+                                         $arrDesp[$rs['category_id']] = array(
+                                             'name'  => $rs['name'],
+                                             'price' => $this->currency->format($this->tax->calculate($rs['precio'], $result['tax_class_id'], $this->config->get('config_tax'))),
+                                             'descuento' => $rs['descuento'],
+                                             'thumb' => $thumb,
+                                             'href'      => $this->url->link('product/category', '&path=' .$rs['parent_id'].'_'.$rs['category_id'] )
+                                         );
+                                  }
                                 }
 
+                                
 
-				$this->data['products'][] = array(
+				/*$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $name,
@@ -270,10 +300,31 @@ class ControllerProductSearch extends Controller {
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'        => $this->url->link('product/product', $url . '&product_id=' . $result['product_id'])
-				);
+                                        'href'       => $this->url->link('product/category', '&path=' .$parent_id.'_'.$category_id ),
+                                        'category_id' => $category_id,
+				);*/
+                                
+
+
 			}
-					
+
+
+                        /* Desplegar por estilo */
+                        $arrEst = array();
+                        $e = 1;
+                        $y = 0;
+                        if ( count( $arrCat ) > 0 ) {
+                            foreach ( array_unique( $arrCat ) as $rs_e ) {
+                                $y = $e++;
+                                if ( $y <= ($limit*$page) ) {
+                                     if ( $y > (($limit * $page) - $limit ) ) {
+                                        $this->data['products'][] = $arrDesp[$rs_e];
+                                     }
+                                }
+                                
+                            }
+                        }
+
 			$url = '';
 			
 			if (isset($this->request->get['filter_name'])) {
@@ -451,10 +502,12 @@ class ControllerProductSearch extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
-					
+
+
 			$pagination = new Pagination();
-			$pagination->total = $product_total;
-			$pagination->page = $page;
+			//$pagination->total = $product_total;
+                        $pagination->total = $y;
+                        $pagination->page = $page;
 			$pagination->limit = $limit;
 			$pagination->text = $this->language->get('text_pagination');
 			$pagination->url = $this->url->link('product/search', $url . '&page={page}');

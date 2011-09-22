@@ -186,7 +186,8 @@ class ControllerCheckoutConfirm extends Controller {
 			}				
 			
 			$product_data = array();
-		
+                        $this->load->model('catalog/product');
+
 			foreach ($this->cart->getProducts() as $product) {
 				$option_data = array();
 	
@@ -221,7 +222,7 @@ class ControllerCheckoutConfirm extends Controller {
 						);								
 					}
 				}
-	 
+
 				$product_data[] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
@@ -326,16 +327,26 @@ class ControllerCheckoutConfirm extends Controller {
 						);												
 					}
 				}  
-	 
+
+
+                                $CatID = $this->model_catalog_product->getProductsStyleID($product['product_id']);
+                                $Catdesc = $this->model_catalog_product->getCatDescripcion($CatID);
+                                $price = $product['price'];
+                                if ( isset( $Catdesc[0]['descuento'] ) ) {
+                                    $price = ( $product['price'] - ( $product['price'] * ( $Catdesc[0]['descuento'] / 100 ) ) );
+                                }
+
 				$this->data['products'][] = array(
 					'product_id' => $product['product_id'],
-					'name'       => $product['name'],
+					/*'name'       => $product['name'],*/
+                                        'name'       => $this->model_catalog_product->getCatProductName($product['product_id']),
 					'model'      => $product['model'],
 					'option'     => $option_data,
 					'quantity'   => $product['quantity'],
 					'subtract'   => $product['subtract'],
 					'tax'        => $this->tax->getRate($product['tax_class_id']),
-					'price'      => $this->currency->format($product['price']),
+					/*'price'      => $this->currency->format($product['price']),*/
+                                        'price'      => $this->currency->format($price),
 					'total'      => $this->currency->format($product['total']),
 					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
 				); 

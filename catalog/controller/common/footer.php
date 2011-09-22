@@ -43,16 +43,47 @@ class ControllerCommonFooter extends Controller {
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 
                 /* Ligas */
-                $this->data['liga_faq'] = $this->url->link('information/faq');
-                $this->data['liga_contact'] = $this->url->link('information/contact');
-                $this->data['liga_sucursales'] = $this->url->link('information/sucursales');
+                $this->data['liga_faq'] = '';
+                $this->data['liga_contact'] = '';
+                $this->data['liga_sucursales'] = '';
+                $this->data['liga_priv'] = '';
+                $this->data['liga_polVenta'] = '';
+                $this->data['liga_polEnvio'] = '';
+                $this->data['cliente_dist'] = '';
+                $this->data['liga_formaPago'] = '';
+                $q_ligas = $this->db->query('SELECT * FROM information ORDER BY `sort_order` ASC ');
+                if( $q_ligas->num_rows > 0 ) {
+                    foreach( $q_ligas->rows as $rs_ligas ) {
+                      if( $rs_ligas['status'] != 0 ) {
+                        if ( $rs_ligas['information_id'] == 3 ) {
+                            $this->data['liga_sucursales'] = $this->url->link('information/sucursales');
+                        }
+                        if ( $rs_ligas['information_id'] == 6 ) {
+                            $this->data['liga_contact'] = $this->url->link('information/contact');
+                        }
+                        if ( $rs_ligas['information_id'] == 4 ) {
+                            $this->data['liga_faq'] = $this->url->link('information/faq');
+                        }
+                        if ( $rs_ligas['information_id'] == 5 ) {
+                            $this->data['liga_priv'] = $this->url->link('information/privacidad');
+                        }
+                        if ( $rs_ligas['information_id'] == 8 ) {
+                            $this->data['liga_polVenta'] = $this->url->link('information/politicasventa');
+                        }
+                        if ( $rs_ligas['information_id'] == 9 ) {
+                            $this->data['liga_polEnvio'] = $this->url->link('information/envio');
+                        }
+                        if ( $rs_ligas['information_id'] == 11 ) {
+                            $this->data['cliente_dist'] = $this->url->link('information/clientedist');
+                        }
+                        if ( $rs_ligas['information_id'] == 10 ) {
+                            $this->data['liga_formaPago'] = $this->url->link('information/formaspago');
+                        }
 
-                $this->data['liga_priv'] = $this->url->link('information/privacidad');
-                $this->data['liga_polVenta'] = $this->url->link('information/politicasventa');
-                $this->data['liga_polEnvio'] = $this->url->link('information/envio');
+                      }
+                    }
+                }
 
-                $this->data['cliente_dist'] = $this->url->link('account/register');
-                $this->data['liga_formaPago'] = $this->url->link('information/formaspago');
                 $this->data['liga_sizechart'] = $this->url->link('information/sizechart');
 
 

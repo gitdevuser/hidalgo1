@@ -22,10 +22,26 @@ class ModelCatalogProduct extends Model {
 
         }
 
+        public function createSearchTag($product_id, $model) {
+
+                $nw_tag = '';
+                $q_tagName = $this->db->query("SELECT * FROM product_to_category as tabla1
+                                  LEFT JOIN category_description as tabla2
+                                  ON tabla1.category_id = tabla2.category_id WHERE tabla1.product_id = '".$product_id."'");
+                if ( $q_tagName->num_rows > 0 ) {
+                    foreach( $q_tagName->rows as $rs_tag ) {
+                      $nw_tag .= $rs_tag['name']. ',';
+                    }
+                }
+                $nw_tag .= $model;
+                return array(1 =>$nw_tag );
+
+        }
+
 	public function addProduct($data) {
 
                 $novedad = 0;
-                if ( $data['novedad'] ) {
+                if ( isset( $data['novedad'] ) ) {
                      $novedad = 1;
                 }
 
@@ -170,17 +186,19 @@ class ModelCatalogProduct extends Model {
 				}
 			}
 		}
-		
+
+
+                //Guardar tag para la busqueda ( categorias padre, modelo )
+                $data['product_tag'] = $this->createSearchTag($product_id, $this->db->escape($data['model']));
 		foreach ($data['product_tag'] as $language_id => $value) {
 			if ($value) {
-				$tags = explode(',', $value);
-				
-				foreach ($tags as $tag) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "product_tag SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', tag = '" . $this->db->escape(trim($tag)) . "'");
-				}
+                            $tags = explode(',', $value);
+                            foreach ($tags as $tag) {
+                                $this->db->query("INSERT INTO " . DB_PREFIX . "product_tag SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', tag = '" . $this->db->escape(trim($tag)) . "'");
+                            }
 			}
 		}
-						
+
 		if ($data['keyword']) {
 
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'product_id=" . (int)$product_id . "', keyword = '" . $this->cleanURL($data['keyword']) . "'");
@@ -392,7 +410,10 @@ class ModelCatalogProduct extends Model {
 		}
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_tag WHERE product_id = '" . (int)$product_id. "'");
-		
+
+                //Guardar tag para la busqueda ( categorias padre, modelo )
+                $data['product_tag'] = $this->createSearchTag($product_id, $this->db->escape($data['model']));
+
 		foreach ($data['product_tag'] as $language_id => $value) {
 			if ($value) {
 				$tags = explode(',', $value);
@@ -404,9 +425,8 @@ class ModelCatalogProduct extends Model {
 		}
 						
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'product_id=" . (int)$product_id. "'");
-		
-		if ($data['keyword']) {
 
+		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'product_id=" . (int)$product_id . "', keyword = '" . $this->cleanURL($data['keyword']) . "'");
 		}
 

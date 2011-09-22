@@ -23,7 +23,7 @@
           <a href="#tab-links"><?php echo $tab_links; ?></a>
           <!--<a href="#tab-attribute" ><?php echo $tab_attribute; ?></a>-->
           <!--<a href="#tab-option"><?php echo $tab_option; ?></a>-->
-          <a href="#tab-discount"><?php echo $tab_discount; ?></a>
+          <!--<a href="#tab-discount"><?php echo $tab_discount; ?></a>-->
           <!--<a href="#tab-special"><?php echo $tab_special; ?></a>-->
           <!--<a href="#tab-image"><?php echo $tab_image; ?></a>-->
           <!--<a href="#tab-reward"><?php echo $tab_reward; ?></a>-->
@@ -168,13 +168,13 @@
               <td><?php echo $entry_date_available; ?></td>
               <td><input type="text" name="date_available" value="<?php echo $date_available; ?>" size="12" class="date" /></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_dimension; ?></td>
               <td><input type="text" name="length" value="<?php echo $length; ?>" size="4" />
                 <input type="text" name="width" value="<?php echo $width; ?>" size="4" />
                 <input type="text" name="height" value="<?php echo $height; ?>" size="4" /></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_length; ?></td>
               <td><select name="length_class_id">
                   <?php foreach ($length_classes as $length_class) { ?>
@@ -186,11 +186,11 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_weight; ?></td>
               <td><input type="text" name="weight" value="<?php echo $weight; ?>" /></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_weight_class; ?></td>
               <td><select name="weight_class_id">
                   <?php foreach ($weight_classes as $weight_class) { ?>
@@ -214,7 +214,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="2" /></td>
             </tr>
@@ -526,7 +526,7 @@
           <?php } ?>
 		  //--></script> 
         </div>
-        <div id="tab-discount">
+        <div id="tab-discount" style="display:none;">
           <table id="discount" class="list">
             <thead>
               <tr>

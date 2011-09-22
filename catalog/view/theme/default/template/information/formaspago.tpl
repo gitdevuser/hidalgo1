@@ -14,7 +14,8 @@ $().ready(function(){
   </div>
   <div class="pages-content" style="margin-bottom: 23px;" >
     <div style="font-size: 14px;">
-Ponemos a disposic&oacute;n de nuestros clientes varias formas de pago para facilitarle la compra de
+<?php if( isset($desc) ) { echo $desc; } ?>
+<!--Ponemos a disposic&oacute;n de nuestros clientes varias formas de pago para facilitarle la compra de
 nuestros productos. Todos nuestros m&eacute;todos de pago son seguros y respaldados por compa&ntilde;ias como American Express, Visa, Master Card y PayPal.
 <p>
 <h1 style="color: #cc6633; font-size: 14px; font-weight: bolder;" >1.Pago mediante tarjeta de cr&eacute;dito:</h1>
@@ -32,7 +33,7 @@ Si escoges esta forma de pago, una vez que decida la opci&oacute;n de <span styl
 <p><p>
 Una vez realizado el pago correctamente, tu pedido estar&aacute; finalizado y se enviar&aacute; un correo electr&oacute;nico con el resumen de tu compra. Pulsando el bot&oacute;n <span style="color: #cc6633;" >"Volver a la Web / www.trajeshidalgo.mx"</span>, regresar&aacute;s a la web para ver el pedido y poder imprimirlo.
 <p>
-En Hidalgo nos preocupamos por la seguridad de nuestros clientes y de nuestro sitio. Para conseguir mejorar la seguridad de nuestro sitio y de las transacciones de nuestros clientes en nuestro sitio <span style="color: #cc6633;" >NO SE ALMACENAN DATOS SOBRE SUS TARJETAS DE CR&Eacute;DITO NI CUENTAS BANCARIAS</span>, los pagos siempre son re direccionados a la p&aacute;gina de segura de la entidad bancaria.
+En Hidalgo nos preocupamos por la seguridad de nuestros clientes y de nuestro sitio. Para conseguir mejorar la seguridad de nuestro sitio y de las transacciones de nuestros clientes en nuestro sitio <span style="color: #cc6633;" >NO SE ALMACENAN DATOS SOBRE SUS TARJETAS DE CR&Eacute;DITO NI CUENTAS BANCARIAS</span>, los pagos siempre son re direccionados a la p&aacute;gina de segura de la entidad bancaria.-->
     </div>
   </div>
   </div>

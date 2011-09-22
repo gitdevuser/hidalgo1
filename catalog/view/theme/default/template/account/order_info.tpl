@@ -14,6 +14,9 @@
   <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
+
+  <div id="imprimir-pedido" ><a href="<?php echo $href_imp; ?>" onclick="window.open(this.href, this.target, 'width=500,height=600'); return false;" >Imprimir</a><p></div>
+  
   <table class="list">
     <thead>
       <tr>
@@ -56,7 +59,9 @@
     <table class="list">
       <thead>
         <tr>
-          <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+          <td width="1" style="text-align: center; display: none;">
+           <input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" style="width:10px; height:10px;" />
+          </td>
           <td class="left"><?php echo $column_name; ?></td>
           <td class="left"><?php echo $column_model; ?></td>
           <td class="right"><?php echo $column_quantity; ?></td>
@@ -67,16 +72,20 @@
       <tbody>
         <?php foreach ($products as $product) { ?>
         <tr>
-          <td style="text-align: center; vertical-align: middle;"><?php if ($product['selected']) { ?>
-            <input type="checkbox" name="selected[]" value="<?php echo $product['order_product_id']; ?>" checked="checked" />
+          <td style="text-align: center; vertical-align: middle; display: none;">
+            <?php if ($product['selected']) { ?>
+            <input type="checkbox" name="selected[]" value="<?php echo $product['order_product_id']; ?>" checked="checked" style="width:10px; height:10px;" />
             <?php } else { ?>
-            <input type="checkbox" name="selected[]" value="<?php echo $product['order_product_id']; ?>" />
-            <?php } ?></td>
-          <td class="left"><?php echo $product['name']; ?>
+            <input type="checkbox" name="selected[]" value="<?php echo $product['order_product_id']; ?>" style="width:10px; height:10px;" />
+            <?php } ?>
+          </td>
+          <td class="left">
+            <?php echo $product['name']; ?>
             <?php foreach ($product['option'] as $option) { ?>
             <br />
             &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-            <?php } ?></td>
+            <?php } ?>
+          </td>
           <td class="left"><?php echo $product['model']; ?></td>
           <td class="right"><?php echo $product['quantity']; ?></td>
           <td class="right"><?php echo $product['price']; ?></td>
@@ -87,14 +96,14 @@
       <tfoot>
         <?php foreach ($totals as $total) { ?>
         <tr>
-          <td colspan="4"></td>
+          <td colspan="3"></td>
           <td class="right"><b><?php echo $total['title']; ?>:</b></td>
           <td class="right"><?php echo $total['text']; ?></td>
         </tr>
         <?php } ?>
       </tfoot>
     </table>
-    <div class="buttons">
+    <div class="buttons" style="display: none;">
       <div class="right"><?php echo $text_action; ?>
         <select name="action" onchange="$('#order').submit();">
           <option value=""><?php echo $text_selected; ?></option>
@@ -140,7 +149,7 @@
   </table>
   <?php } ?>
   <div class="buttons">
-    <div class="right"><a href="<?php echo $continue; ?>" class="button"><span><?php echo $button_continue; ?></span></a></div>
+    <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
 
     </div>

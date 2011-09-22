@@ -52,7 +52,7 @@
               <td><?php echo $text_total_customer_approval; ?></td>
               <td><?php echo $total_customer_approval; ?></td>
             </tr>
-            <tr>
+            <!--<tr>
               <td><?php echo $text_total_review_approval; ?></td>
               <td><?php echo $total_review_approval; ?></td>
             </tr>
@@ -63,7 +63,7 @@
             <tr>
               <td><?php echo $text_total_affiliate_approval; ?></td>
               <td><?php echo $total_affiliate_approval; ?></td>
-            </tr>
+            </tr>-->
           </table>
         </div>
       </div>

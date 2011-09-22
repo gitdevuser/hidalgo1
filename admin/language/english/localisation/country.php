@@ -1,41 +1,41 @@
 <?php
 // Heading
-$_['heading_title']           = 'Country';
+$_['heading_title']           = 'País';
 
 // Text
-$_['text_success']            = 'Success: You have modified countries!';
+$_['text_success']            = 'Has modificado paises!';
 
 // Column
-$_['column_name']             = 'Country Name';
+$_['column_name']             = 'Nombre del país';
 $_['column_iso_code_2']       = 'ISO Code (2)';
 $_['column_iso_code_3']       = 'ISO Code (3)';
-$_['column_action']           = 'Action';
+$_['column_action']           = 'Acción';
 
 // Entry
-$_['entry_name']              = 'Country Name:';
+$_['entry_name']              = 'Nombre del país:';
 $_['entry_iso_code_2']        = 'ISO Code (2):';
 $_['entry_iso_code_3']        = 'ISO Code (3):';
-$_['entry_address_format']    = 'Address Format:<br /><span class="help">
-First Name = {firstname}<br />
-Last Name = {lastname}<br />
-Company = {company}<br />
-Address 1 = {address_1}<br />
+$_['entry_address_format']    = 'Formato de la dirección:<br /><span class="help">
+Nombre = {firstname}<br />
+Apellido = {lastname}<br />
+Compañía = {company}<br />
+Dirección = {address_1}<br />
 Address 2 = {address_2}<br />
-City = {city}<br />
-Postcode = {postcode}<br />
-Zone = {zone}<br />
-Zone Code = {zone_code}<br />
-Country = {country}</span>';
-$_['entry_postcode_required'] = 'Postcode Required:';
-$_['entry_status']            = 'Status:';
+Ciudad = {city}<br />
+Código postal = {postcode}<br />
+Zona = {zone}<br />
+Código de zona = {zone_code}<br />
+País = {country}</span>';
+$_['entry_postcode_required'] = 'Código postal requerido:';
+$_['entry_status']            = 'Estatus:';
 
 // Error
-$_['error_permission']        = 'Warning: You do not have permission to modify countries!';
-$_['error_name']              = 'Country Name must be between 3 and 128 characters!';
-$_['error_default']           = 'Warning: This country cannot be deleted as it is currently assigned as the default store country!';
-$_['error_store']             = 'Warning: This country cannot be deleted as it is currently assigned to %s stores!';
-$_['error_address']           = 'Warning: This country cannot be deleted as it is currently assigned to %s address book entries!';
-$_['error_affiliate']         = 'Warning: This country cannot be deleted as it is currently assigned to %s affiliates!';
-$_['error_zone']              = 'Warning: This country cannot be deleted as it is currently assigned to %s zones!';
-$_['error_zone_to_geo_zone']  = 'Warning: This country cannot be deleted as it is currently assigned to %s zones to geo zones!';
+$_['error_permission']        = 'Advertencia: No tiene permisos para modificar paises!';
+$_['error_name']              = 'Nombre del país debe estar entre 3 y 128 caracteres!';
+$_['error_default']           = 'Advertencia: Este país no puede ser eliminado ya que no está asignado actualmente como el país predeterminado!';
+$_['error_store']             = 'Advertencia: Este país no puede ser eliminado ya que no está asignado a las tiendas de %s!';
+$_['error_address']           = 'Advertencia: Este país no puede ser eliminado ya que no está asignado actualmente a %s entradas de la libreta de direcciones!';
+$_['error_affiliate']         = 'Advertencia: Este país no puede ser eliminado ya que no está asignado actualmente a los afiliados %s!';
+$_['error_zone']              = 'Advertencia: Este país no puede ser eliminado ya que no está asignado a las zonas de %s!';
+$_['error_zone_to_geo_zone']  = 'Advertencia: Este país no puede ser eliminado ya que no está asignado a las zonas de %s para la Geo zona!';
 ?>

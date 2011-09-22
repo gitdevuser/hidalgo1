@@ -69,17 +69,18 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
           <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
-          <li><a class="parent"><?php echo $text_attribute; ?></a>
+          <!--<li><a class="parent"><?php echo $text_attribute; ?></a>
             <ul>
               <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
               <li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a></li>
             </ul>
-          </li>
-          <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
+          </li>-->
+          <!--<li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>-->
           <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
           <!--<li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>-->
           <!--<li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>-->
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <li><a href="<?php echo $importacion; ?>"><i>Importador</i></a></li>
         </ul>
       </li>
       <li id="extension"><a class="top"><?php echo $text_extension; ?></a>
@@ -101,7 +102,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $customer_group; ?>"><?php echo $text_customer_group; ?></a></li>
             </ul>
           </li>
-          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
+          <!--<li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>-->
           <!--<li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>-->
           <!---<li><a class="parent"><?php echo $text_voucher; ?></a>
             <ul>
@@ -124,12 +125,12 @@ $(document).ready(function(){
           <li><a class="parent"><?php echo $text_users; ?></a>
             <ul>
               <li><a href="<?php echo $user; ?>"><?php echo $text_user; ?></a></li>
-              <li><a href="<?php echo $user_group; ?>"><?php echo $text_user_group; ?></a></li>
+              <!--<li><a href="<?php echo $user_group; ?>"><?php echo $text_user_group; ?></a></li>-->
             </ul>
           </li>
           <li><a class="parent"><?php echo $text_localisation; ?></a>
             <ul>
-              <li><a href="<?php echo $language; ?>"><?php echo $text_language; ?></a></li>
+              <!--<li><a href="<?php echo $language; ?>"><?php echo $text_language; ?></a></li>-->
               <li><a href="<?php echo $currency; ?>"><?php echo $text_currency; ?></a></li>
               <li><a href="<?php echo $stock_status; ?>"><?php echo $text_stock_status; ?></a></li>
               <li><a href="<?php echo $order_status; ?>"><?php echo $text_order_status; ?></a></li>
@@ -144,7 +145,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $zone; ?>"><?php echo $text_zone; ?></a></li>
               <li><a href="<?php echo $geo_zone; ?>"><?php echo $text_geo_zone; ?></a></li>
               <li><a href="<?php echo $tax_class; ?>"><?php echo $text_tax_class; ?></a></li>
-              <li><a href="<?php echo $length_class; ?>"><?php echo $text_length_class; ?></a></li>
+              <!--<li><a href="<?php echo $length_class; ?>"><?php echo $text_length_class; ?></a></li>-->
               <li><a href="<?php echo $weight_class; ?>"><?php echo $text_weight_class; ?></a></li>
             </ul>
           </li>
@@ -172,15 +173,15 @@ $(document).ready(function(){
           <li><a class="parent"><?php echo $text_customer; ?></a>
             <ul>
               <li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
-              <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
-              <li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
+              <!--<li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>-->
+              <!--<li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>-->
             </ul>
           </li>
-          <li><a class="parent"><?php echo $text_affiliate; ?></a>
+          <!--<li><a class="parent"><?php echo $text_affiliate; ?></a>
             <ul>
               <li><a href="<?php echo $report_affiliate_commission; ?>"><?php echo $text_report_affiliate_commission; ?></a></li>
             </ul>
-          </li>          
+          </li>-->
         </ul>
       </li>
       <!--<li id="help"><a class="top"><?php echo $text_help; ?></a>

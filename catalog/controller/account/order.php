@@ -116,10 +116,11 @@ class ControllerAccountOrder extends Controller {
 		
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
+                        $this->data['href_imp'] = $this->url->link('account/order/info', 'order_id=' . $this->request->get['order_id'].'&imp=1', 'SSL');
 		} else {
 			$order_id = 0;
 		}	
-		
+
 		$this->load->model('account/order');
 			
 		$order_info = $this->model_account_order->getOrder($order_id);
@@ -383,8 +384,26 @@ class ControllerAccountOrder extends Controller {
 				'common/footer',
 				'common/header'	
 			);
-								
-			$this->response->setOutput($this->render());		
+
+                        if(isset($this->request->get['imp'])) {
+
+                            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/order_print.tpl')) {
+				$this->template = $this->config->get('config_template') . '/template/account/order_print.tpl';
+                            } else {
+				$this->template = 'default/template/account/order_info.tpl';
+                            }
+                            
+                            $this->children = array(
+				'common/content_top',
+				'common/content_bottom'
+                            );
+                            $this->response->setOutput($this->render());
+
+                        }
+                            $this->response->setOutput($this->render());		
+
+
+			
     	} else {
 			$this->document->setTitle($this->language->get('text_order'));
 			
@@ -439,7 +458,7 @@ class ControllerAccountOrder extends Controller {
 								
 			$this->response->setOutput($this->render());				
     	}
-  	}
+  	} //Fin info
 	
 	private function validate() {
 		if (!isset($this->request->post['selected']) || !isset($this->request->post['action']) || !$this->request->post['action']) {

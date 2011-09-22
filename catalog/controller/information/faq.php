@@ -4,15 +4,21 @@ class ControllerInformationFaq extends Controller {
 	    
   	public function index() {
 
-                $this->document->setTitle( 'Preguntas Frecuentes' );
-                $this->data['heading_title'] = 'PREGUNTAS FRECUENTES';
+
+                $this->load->model('catalog/information');
+                $information_info = $this->model_catalog_information->getInformation(4);
+
+                $this->document->setTitle( $information_info['title'] );
+                $this->data['heading_title'] = strtoupper( $information_info['title'] );
+                $this->data['desc'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/faq.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/information/faq.tpl';
 		} else {
-			$this->template = 'default/template/information/politicasventa.tpl';
+			$this->template = 'default/template/information/faq.tpl';
 		}
-		
+
 		$this->children = array(
 			'common/column_left',
 			'common/column_right',

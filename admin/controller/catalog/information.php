@@ -116,7 +116,7 @@ class ControllerCatalogInformation extends Controller {
 		} else {
 			$sort = 'id.title';
 		}
-		
+
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
@@ -189,7 +189,7 @@ class ControllerCatalogInformation extends Controller {
 				'action'         => $action
 			);
 		}	
-	
+
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
@@ -355,7 +355,26 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['information_description'] = array();
 		}
 
-		if (isset($this->request->post['status'])) {
+                $this->data['id_info'] = '';
+                if ( isset( $this->request->get['information_id'] ) ) {
+                    $this->data['id_info'] = $this->request->get['information_id'];
+                }
+
+                $this->data['sucursales_info'] = '';
+                if ( isset( $this->request->get['information_id'] ) && ( $this->request->get['information_id'] == 3 ) ) {
+                     $this->data['sucursales_info'] = $information_info['info_sucursal'];
+                } else {
+                     $this->data['sucursales_info'] = '';
+                }
+
+                $this->data['redes'] = '';
+                if ( isset( $this->request->get['information_id'] ) && ( $this->request->get['information_id'] == 12 ) ) {
+                     $this->data['redes'] = $information_info['info_sucursal'];
+                }
+
+
+
+                if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
 		} elseif (isset($information_info)) {
 			$this->data['status'] = $information_info['status'];
@@ -374,7 +393,7 @@ class ControllerCatalogInformation extends Controller {
 		} else {
 			$this->data['information_store'] = array(0);
 		}		
-		
+
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
 		} elseif (isset($information_info)) {

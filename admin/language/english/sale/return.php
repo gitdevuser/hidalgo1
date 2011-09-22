@@ -1,57 +1,57 @@
 <?php
 // Heading
-$_['heading_title']       = 'Product Returns';
+$_['heading_title']       = 'Produtos devolución';
 
 // Text
-$_['text_opened']         = 'Opened';
-$_['text_unopened']       = 'Unopened';
-$_['text_success']        = 'Success: You have modified returns!';
-$_['text_wait']           = 'Please Wait!';
+$_['text_opened']         = 'Abierto';
+$_['text_unopened']       = 'Sin abrir';
+$_['text_success']        = 'Has modificado devolución!';
+$_['text_wait']           = 'Espere!';
 
 // Text
-$_['text_return_id']      = 'Return ID:';
-$_['text_order_id']       = 'Order ID:';
-$_['text_date_ordered']   = 'Order Date:';
-$_['text_customer']       = 'Customer:';
+$_['text_return_id']      = 'ID Devolución:';
+$_['text_order_id']       = 'ID Orden:';
+$_['text_date_ordered']   = 'Fecha de la Orden:';
+$_['text_customer']       = 'Cliente:';
 $_['text_email']          = 'E-Mail:';
-$_['text_telephone']      = 'Telephone:';
-$_['text_return_status']  = 'Return Status:';
-$_['text_comment']        = 'Comment:';
-$_['text_date_added']     = 'Date Added:';
-$_['text_date_modified']  = 'Date Modified:';
+$_['text_telephone']      = 'Teléfono:';
+$_['text_return_status']  = 'Estado de la devolución:';
+$_['text_comment']        = 'Comentario:';
+$_['text_date_added']     = 'Fecha de alta:';
+$_['text_date_modified']  = 'Última modificación:';
 
 // Column
-$_['column_return_id']     = 'Return ID';
-$_['column_order_id']      = 'Order ID';
-$_['column_customer']      = 'Customer';
-$_['column_quantity']      = 'Quantity';
-$_['column_status']        = 'Status';
-$_['column_date_added']    = 'Date Added';
-$_['column_date_modified'] = 'Date Modified';
-$_['column_product']       = 'Product';
-$_['column_model']         = 'Model';
-$_['column_reason']        = 'Return Reason';
-$_['column_opened']        = 'Opened';
-$_['column_notify']        = 'Customer Notified';
-$_['column_comment']       = 'Comment';
-$_['column_action']        = 'Action';
+$_['column_return_id']     = 'ID Devolución';
+$_['column_order_id']      = 'ID Orden';
+$_['column_customer']      = 'Cliente';
+$_['column_quantity']      = 'Cantidad';
+$_['column_status']        = 'Estatus';
+$_['column_date_added']    = 'Fecha de alta';
+$_['column_date_modified'] = 'Última modificación';
+$_['column_product']       = 'Producto';
+$_['column_model']         = 'Modelo';
+$_['column_reason']        = 'Razon de devolución';
+$_['column_opened']        = 'Abierto';
+$_['column_notify']        = 'Cliente notificado';
+$_['column_comment']       = 'Comentario';
+$_['column_action']        = 'Acción';
 
 // Entry
-$_['entry_customer']      = 'Customer:';
-$_['entry_order_id']      = 'Order ID:';
-$_['entry_date_ordered']  = 'Order Date:';
-$_['entry_firstname']     = 'First Name:';
-$_['entry_lastname']      = 'Last Name:';
+$_['entry_customer']      = 'Cliente:';
+$_['entry_order_id']      = 'ID Orden:';
+$_['entry_date_ordered']  = 'Fecha de la Orden:';
+$_['entry_firstname']     = 'Nombre:';
+$_['entry_lastname']      = 'Apellido:';
 $_['entry_email']         = 'E-Mail:';
-$_['entry_telephone']     = 'Telephone:';
-$_['entry_product']       = 'Product:';
-$_['entry_model']         = 'Model:';
-$_['entry_quantity']      = 'Quantity:';
-$_['entry_reason']        = 'Return Reason:';
-$_['entry_opened']        = 'Opened:';
-$_['entry_comment']       = 'Comment:';
-$_['entry_return_status'] = 'Return Status:';
-$_['entry_notify']        = 'Notify Customer:';
+$_['entry_telephone']     = 'Teléfono:';
+$_['entry_product']       = 'Producto:';
+$_['entry_model']         = 'Modelo:';
+$_['entry_quantity']      = 'Cantidad:';
+$_['entry_reason']        = 'Razon de devolución:';
+$_['entry_opened']        = 'Abierto:';
+$_['entry_comment']       = 'Comentario:';
+$_['entry_return_status'] = 'Estatus devolución:';
+$_['entry_notify']        = 'Cliente notificado:';
 $_['entry_action']        = 'Return Action:';
 
 // Error

@@ -1,5 +1,5 @@
 <?php 
-class ControllerInformationCronImport extends Controller {
+class ControllerInformationCronimport extends Controller {
 	private $error = array(); 
 	    
   	public function index() {
@@ -13,10 +13,17 @@ class ControllerInformationCronImport extends Controller {
 			$this->template = 'default/template/information/cronimport.tpl';
 		}
 
+
+                echo "-+";
+                echo "<br>";
+
+                /*$this->db->query( "UPDATE `product` SET `quantity` = '7',
+                                          `price` = '7' WHERE `product_id` ='7'" );*/
+
                 /**
                  * Importando
                  **/
-                ini_set ('auto_detect_line_endings','1');
+                /*ini_set ('auto_detect_line_endings','1');
                 $fp = fopen("http://bitlab.com.mx/clientes/hidalgo/csv/ActQtyPrice.csv","r");
 
                 while ($data = fgetcsv ($fp, 1000, "|")) {
@@ -32,7 +39,7 @@ class ControllerInformationCronImport extends Controller {
 
 
 
-                }
+                }*/
   	}
 }
 ?>

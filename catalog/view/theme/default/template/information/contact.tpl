@@ -17,10 +17,7 @@ $().ready(function(){
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="contact">
 
     <div id="pages-description" >
-        En esta secci&oacute;n podr&aacute; contactar de manera directa a nuestro personal. Br&iacute;
-        Br&iacute;ndenos la oportunidad de enviarnos sus comentarios para nosotros son muy importantes.
-        Si deseas pedir informes estamos a sus ordenes. Su correo ser&aacute; canalizado a la 
-        persona adecuada, quien le dar&aacute; respuesta a la brevedad.
+    <?php if( isset($desc) ) { echo $desc; } ?>
     </div>
 
         <div class="contactInfo-container" >

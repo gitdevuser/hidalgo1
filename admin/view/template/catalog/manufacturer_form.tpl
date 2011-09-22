@@ -25,7 +25,7 @@
                 <span class="error"><?php echo $error_name; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_store; ?></td>
               <td><div class="scrollbox">
                   <?php $class = 'even'; ?>
@@ -52,11 +52,11 @@
                   <?php } ?>
                 </div></td>
             </tr>
-            <tr>
+            <tr style="display:none;" >
               <td><?php echo $entry_keyword; ?></td>
               <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
             </tr>
-            <tr>
+            <tr style="display:none;">
               <td><?php echo $entry_image; ?></td>
               <td><input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
                 <img src="<?php echo $preview; ?>" alt="" id="preview" class="image" onclick="image_upload('image', 'preview');" /></td>

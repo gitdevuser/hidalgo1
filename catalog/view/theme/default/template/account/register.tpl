@@ -1,36 +1,17 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<script>
-$().ready(function(){
-    menu_select(6);
-});
-</script>
 <div id="content">
 <div class="top-shadow" >&nbsp;</div>
 <?php echo $content_top; ?>
 <div id="pages-container" >
   <div class="page-title" >
-    <h1><?php echo $heading_title; ?></h1>
+    <h1>REGISTRO DE USUARIO</h1>
   </div>
   <div class="pages-content" >
-
-  <div id="clienteDisting-cont" >
-      <img src="catalog/view/theme/default/image/cliente-distinguido.jpg">
-<label>
-Si desea recibir promociones y descuentos permanentes en nuestras sucursales, llene el formato.
-Cuando desee hacer una compra en nuestras sucursales, &uacute;nicamente pres&eacute;ntela antes de que le elaboren su nota para que le apliquen su descuento.
-<br><br>
-Esta tarjeta se divide en 3 parte que debe usted desprender, una es para su cartera y dos m&aacute;s peque&ntilde;s para adherirla a sus llaveros y as&iacute; nunca la olvide. Con una de ellas que presente es suficiente.
-<br>
-Los beneficios inmediatos que recibi&aacute; son del 10% de descuento si su pago es en efectivo, 8% con tarjeta de d&eacute;bito y 5% con tarjeta de cr&eacute;dito.
-<br>
-Estos descuentos NO son acumulables con otras promociones, no aplica a Meses Sin Intereses, NO aplica en la Tienda de Internet.
-</label>
-  </div>
 
   <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
-  <div id="register-container" >
+  <div id="register-container" style="background: none;" >
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="register">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
@@ -57,7 +38,7 @@ Estos descuentos NO son acumulables con otras promociones, no aplica a Meses Sin
             <?php } ?></td>
         </tr>
         <tr>
-          <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
+          <td><span class="required">*</span> DIRECCI&Oacute;N</td>
           <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
             <?php if ($error_address_1) { ?>
             <span class="error"><?php echo $error_address_1; ?></span>
@@ -84,8 +65,8 @@ Estos descuentos NO son acumulables con otras promociones, no aplica a Meses Sin
             <?php } ?></td>
         </tr>
         <tr>
-          <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-          <td class="selectbox"><select name="zone_id">
+          <td><span class="required">*</span> ESTADO</td>
+            <td class="selectbox"><select name="zone_id">
             </select>
             <?php if ($error_zone) { ?>
             <span class="error"><?php echo $error_zone; ?></span>
@@ -163,7 +144,9 @@ Estos descuentos NO son acumulables con otras promociones, no aplica a Meses Sin
     </div>-->
     <?php if ($text_agree) { ?>
     <div class="buttons">
-      <div class="right"><?php echo $text_agree; ?>
+      <div class="right">
+        asdad4 d5as4 d5sa4
+        <?php echo $text_agree; ?>
         <?php if ($agree) { ?>
         <input type="checkbox" name="agree" value="1" checked="checked" />
         <?php } else { ?>

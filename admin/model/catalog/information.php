@@ -31,7 +31,11 @@ class ModelCatalogInformation extends Model {
 	}
 	
 	public function editInformation($information_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
+
+                $status = 1;
+                if ( isset( $data['status'] ) ) { $status = $data['status']; }
+
+		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', status = '" . $status . "' WHERE information_id = '" . (int)$information_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
 					
@@ -62,7 +66,26 @@ class ModelCatalogInformation extends Model {
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
-		
+
+            /*Sucursales*/
+            if ( $information_id == 3 ) {
+                $suc = array();
+                for( $e = 0; $e <= 2; $e++ ) {
+                 $suc[] = array( 'mapa' => array( 'long' =>$data['long'][$e], 'lat' => $data['lat'][$e] ), 'foto' => $data['foto'][$e] );
+                }
+                $this->db->query( "UPDATE " . DB_PREFIX . "information SET info_sucursal = '".serialize($suc)."'
+                                    WHERE information_id = '".$information_id."'" );
+            }
+
+            /*Redes*/
+            if ( $information_id == 12 ) {
+                $red = array();
+                $red =array( 0 => $data['facebook'], 1 => $data['twitter'] );
+                $this->db->query( "UPDATE " . DB_PREFIX . "information SET info_sucursal = '".serialize($red)."'
+                                    WHERE information_id = '".$information_id."'" );
+            }
+
+
 		$this->cache->delete('information');
 	}
 	

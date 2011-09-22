@@ -149,7 +149,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
-    	$this->data['text_disabled'] = $this->language->get('text_disabled');
+                $this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_percent'] = $this->language->get('text_percent');
 		$this->data['text_amount'] = $this->language->get('text_amount');
 				
@@ -328,7 +328,6 @@ class ControllerCatalogCategory extends Controller {
                     $CaractCat = $this->model_catalog_category->getCategoryDescriptions($this->request->get['category_id']);
                 }
                 
-
 		if (isset($this->request->post['composicion'])) {
 			$this->data['composicion'] = $this->request->post['composicion'];
 		} elseif (isset($category_info)) {
@@ -337,20 +336,18 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['composicion'] = '';
 		}
 
+                $this->data['cuid'] = '';
 		if (isset($this->request->post['cuidado'])) {
-			$this->data['cuidado'] = $this->request->post['cuidado'];
+			$this->data['cuid'] = $this->request->post['cuidado'];
 		} elseif (isset($category_info)) {
-			$this->data['cuidado'] = $CaractCat[1]['cuidado'];
-		} else {
-			$this->data['cuidado'] = '';
+			$this->data['cuid'] = $CaractCat[1]['cuidado'];
 		}
 
+                $this->data['corte'] = '';
 		if (isset($this->request->post['corte'])) {
 			$this->data['cuidado'] = $this->request->post['corte'];
 		} elseif (isset($category_info)) {
 			$this->data['corte'] = $CaractCat[1]['corte'];
-		} else {
-			$this->data['corte'] = '';
 		}
 
 		if (isset($this->request->post['caract'])) {
@@ -384,6 +381,27 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['imagen_estilo'] = '';
 		}
+
+
+                //Productos relacionados
+                $this->data['product_related'] = array();
+                if ( isset( $this->request->get['category_id'] ) ) {
+                $q_rel = $this->db->query( "SELECT related_id FROM category_related
+                                            WHERE category_id = '".$this->request->get['category_id']."'" );
+                 if ( $q_rel->num_rows > 0 ) {
+                    foreach( $q_rel->rows as $related_info ) {
+                        $name = '';
+                        $q_name = $this->db->query( "SELECT name FROM category_description WHERE category_id ='".$related_info['related_id']."'" );
+                        if( $q_name->num_rows > 0 ) {
+                            $name = $q_name->row['name'];
+                        }
+                        $this->data['product_related'][] = array(
+                            'related_id' => $related_info['related_id'],
+                            'name'       => $name
+                            );
+                    }
+                  }
+                }
 
                 /*Extra module*/
 		$extraLeftMod = $this->model_catalog_category->getExtraLeftModule();
@@ -445,5 +463,47 @@ class ControllerCatalogCategory extends Controller {
 			return false;
 		}
 	}
+
+
+
+
+            public function autocompleto() {
+		$json = array();
+
+		if (isset($this->request->post['filter_name'])) {
+                        
+			$this->load->model('catalog/category');
+
+			$data = array(
+				'filter_name' => $this->request->post['filter_name'],
+				'start'       => 0,
+				'limit'       => 20
+			);
+
+                        
+                        $results = $this->model_catalog_category->getCategoriesRel($data);
+
+                        if ( $results > 0 ) {
+			foreach ($results as $result) {
+
+				$option_data = array();
+				$json[] = array(
+					'category_id' => $result['category_id'],
+					'name'       => html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'),
+					'model'      => '',
+					'option'     => '',
+					'price'      => ''
+				);
+			}
+                        }
+		}
+
+		$this->load->library('json');
+
+		$this->response->setOutput(Json::encode($json));
+	}
+
+
+
 }
 ?>

@@ -8,7 +8,6 @@
      <h1 style="width:300px" ><?php echo $heading_title; ?></h1>
   </div>
   <div class="pages-content" style="margin-bottom: 23px;" >
-
   
   <div class="checkout">
     <div id="checkout">

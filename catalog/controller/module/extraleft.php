@@ -9,21 +9,32 @@ class ControllerModuleExtraleft extends Controller {
 		$this->load->model('catalog/product');
                 
                 //Descripcion de categoria
-                $q_catDesc = $this->db->query( 'SELECT * FROM category_description WHERE left_extra_module !=""' );
+                $q_catDesc = $this->db->query( 'SELECT * FROM category_description as tabla1 
+                                                LEFT JOIN category as tabla2
+                                                ON tabla2.category_id = tabla1.category_id
+                                                WHERE tabla1.left_extra_module !="" AND tabla2.parent_id = 0' );
                 $extra_info = '';
                 $arrayCatInfo = array();
                 if ( $q_catDesc->num_rows > 0 ) {
                    foreach ( $q_catDesc->rows as $rs_catdesc ) {
                           $extra_info = unserialize($rs_catdesc['left_extra_module']);
                           foreach ( $extra_info as $rs_ext ) {
+                              $links = '';
+                              if ( $rs_ext == 1 ) {
+                                $links = $this->url->link('product/category', 'path=' . $rs_catdesc['category_id']);
+                              } else {
+                                $links = $this->url->link('product/category', 'path=' . $rs_catdesc['category_id'].'&modulo_izq='.$rs_ext);
+                              }
+
                             $arrayCatInfo[][$rs_ext] = array(
                                 'category_id' => $rs_catdesc['category_id'],
                                 'name' => $rs_catdesc['name'],
-                                'href' => $this->url->link('product/category', 'path=' . $rs_catdesc['category_id'])
+                                'href' => $links
                             );
                           }
                    }
                 }
+
                 $arrayList = array();
                 $arrayCatExt = array();
                 $q_left_extra = $this->db->query( 'SELECT * FROM left_extra_module WHERE visible=1 ORDER BY weight' );

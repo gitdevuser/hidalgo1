@@ -4,9 +4,9 @@
   <p><b>Registrar nueva cuenta<?php //echo $text_checkout; ?></b></p>
   <label for="register">
     <?php if ($account == 'register') { ?>
-    <input type="radio" name="account" value="register" id="register" checked="checked" />
+    <input type="radio" name="account" value="register" id="register" checked="checked" style="display: none;" />
     <?php } else { ?>
-    <input type="radio" name="account" value="register" id="register" />
+    <input type="radio" name="account" value="register" id="register" style="display: none;" />
     <?php } ?>
     <!--<b><?php echo $text_register; ?></b>-->
   </label>

@@ -75,19 +75,25 @@ $().ready(function() {
 
                 }
 
-                function recorreLista( sl_index ) {
+                function recorreLista( sl_index, inicio ) {
 
                     $( '.medida-talla, .medida-subs' ).removeClass( 'even' );
 
-                          //Imagen
+                //Imagen
                 $( '.image' ).removeClass('selected');
                 $( '.image' ).each(function(){
                     if ( $( this ).attr( 'name' ) == sl_index ) {
                         $( this ).addClass( 'selected' );
                     }
                 });
-                    //$( '.image' ).addClass('selected');
-
+                
+                //selecciona imagenes de Inicio
+                if( inicio !=null) {
+                    if ( $( '.estilo-img' ).length > 0 ) {
+                         $( '.image' ).removeClass('selected');
+                         $( '.estilo-img' ).eq(0).addClass('selected');
+                    }
+                }
 
                     for(var i in ProdbyCat) {
                         
@@ -171,7 +177,7 @@ $().ready(function() {
                     if ( ( precio1 !="" ) && ( precio1 != cat_precio ) ) {
                         nw_precio = precio1;
                     }
-                    $( '#price-cart' ).html( nw_precio );
+                    //$( '#price-cart' ).html( nw_precio );
 
 
                     if( e == 0 ) {
@@ -432,7 +438,7 @@ $().ready(function() {
                 });
 
                 //Valores inciales
-                recorreLista( $( '.choose-color.selected' ).attr( 'name' ) );
+                recorreLista( $( '.choose-color.selected' ).attr( 'name' ), 1 );
                 
 
 });

@@ -12,11 +12,14 @@
     <tbody>
       <?php foreach ($products as $product) { ?>
       <tr>
-        <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+        <td class="name">
+          <!--<a href="<?php echo $product['href']; ?>"></a>-->
+          <?php echo $product['name']; ?>
           <?php foreach ($product['option'] as $option) { ?>
           <br />
           &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-          <?php } ?></td>
+          <?php } ?>
+        </td>
         <td class="model"><?php echo $product['model']; ?></td>
         <td class="quantity"><?php echo $product['quantity']; ?></td>
         <td class="price"><?php echo $product['price']; ?></td>

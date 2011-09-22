@@ -14,7 +14,8 @@ $().ready(function(){
   </div>
   <div class="pages-content pol-venta"  >
     <div style="font-size: 14px;">
-<h1 style="color: #cc6633; font-size: 14px; font-weight: bolder;" >HORA DE OPERACION</h1>
+    <?php if( isset($desc) ) { echo $desc; } ?>
+<!--<h1 style="color: #cc6633; font-size: 14px; font-weight: bolder;" >HORA DE OPERACION</h1>
 Si usted desea informaci&oacute;n sobre los productos, Hidalgo S.A. de C.V. estamos disponibles para atenderle
 de Lunes a Viernes de 10:00a.m. a 7:00p.m. tiempo del centro de la Rep&uacute;blica Mexicana, al tel&eacute;fono 001-800-00-1951 desde el interior de la Rep&uacute;blica o al 5130-0324 desde el &Aacute;rea Metropolitana. Para informaci&oacute;n del estatus de su pedido o cualquiera otra sistencia con su pedido
 que usted ya haya realizado puede mandarnos un correo electr&oacute;nico a <a href="#" style="color:#cc6633;" >status@trajeshidalgo.com.mx</a> o a los tel&eacute;fonos arriba mencionados.
@@ -36,7 +37,7 @@ La solicitud tend&aacute; una vigencia de 5(cinco) di&iacute;s calendarios a par
 <p>
 La solicitud tend&aacute; una vigencia de 5(cinco) di&iacute;s calendarios a partir de la fecha de emisi&oacute;n, el cargo por.....
 <p>
-La solicitud tend&aacute; una vigencia de 5(cinco) di&iacute;s calendarios a partir de la fecha de emisi&oacute;n, el cargo por.....
+La solicitud tend&aacute; una vigencia de 5(cinco) di&iacute;s calendarios a partir de la fecha de emisi&oacute;n, el cargo por.....-->
 
     </div>
   </div>

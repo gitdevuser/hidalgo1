@@ -10,7 +10,7 @@
 <?php } ?>
 <div class="box">
   <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+    <h1><img src="view/image/module.png" alt="" /><?php echo $heading_title; ?></h1>
     <div class="buttons"><a class="button salvar"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
   </div>
   <div class="content">
@@ -38,7 +38,11 @@
                 <tr><td><input type="text" name="titulo[]" value="<?php echo $rs_md['extra_nom']; ?>"></td>
                 <td><input type="text" name="posicion[]" value="<?php echo $rs_md['weight']; ?>"></td>
                 <td><input type="checkbox" name="visible[<?php echo $y; ?>]" <?php echo $selected; ?> ></td>
-                <td><a class="button" onClick="eliminar(<?php echo $y; ?>);" ><span>Eliminar</span></a></td>
+                <td>
+                  <?php if( $y !="" ){  ?>
+                  <a class="button" onClick="eliminar(<?php echo $y; ?>);" ><span>Eliminar</span></a>
+                  <?php } ?>
+                </td>
                 </tr>
             </tbody>
             <?php
